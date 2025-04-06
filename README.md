@@ -3,16 +3,8 @@
 
 TODO list of improvements
 
-**V1**
-
-backend: 
-- [ ] server should fetch existing tasks in mongodb on 1st time load
-
-frontend: 
-- [ ] install Mui  and add theme customisation 
-- [ ] improve User interface
-
 **V1 - improvements**
 
+- [ ] improve User interface on Mobile device
+- [ ] Add User model - Each user should only be able to see its own tasks
 - [ ] Add authenticated user experience
-- [ ] Each user should only be able to see its own tasks
