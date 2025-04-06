@@ -1,0 +1,1 @@
+export const API_TASKS_ENDPOINT= `${import.meta.env.VITE_BACKEND_API_URL}tasks`;
