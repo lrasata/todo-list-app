@@ -1,16 +1,16 @@
 const express = require("express");
 const {getAllTasks, createTask, deleteTask, updateTask} = require("../controllers/task-controller");
-const {userVerification} = require("../middlewares/auth-middleware");
+const {authMiddlewareForAPI} = require("../middlewares/auth-middleware");
 
 const router = express.Router();
 
 // routes for Task management
-router.get("/", userVerification, getAllTasks);
+router.get("/", authMiddlewareForAPI, getAllTasks);
 
-router.post("/", userVerification, createTask);
+router.post("/", authMiddlewareForAPI, createTask);
 
-router.delete("/:id", userVerification, deleteTask);
+router.delete("/:id", authMiddlewareForAPI, deleteTask);
 
-router.put("/:id", userVerification, updateTask);
+router.put("/:id", authMiddlewareForAPI, updateTask);
 
 module.exports = router;

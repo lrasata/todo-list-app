@@ -8,7 +8,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}));
 app.use(cookieParser());
 app.use(express.json());
 
@@ -25,12 +29,20 @@ const connectDB = async () => {
 // Call the database connection function
 connectDB();
 
-const tasksRoutes = require("./src/routes/tasks");
-app.use("/api/tasks", tasksRoutes);
+app.use((req, res, next) => {
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'OPTIONS, GET, POST, PUT, DELETE'
+    );
+    next();
+});
 
 const authRoutes = require("./src/routes/auth");
-app.use("/api", authRoutes);
+app.use("/", authRoutes);
 
+const tasksRoutes = require("./src/routes/tasks");
+
+app.use("/api/tasks", tasksRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

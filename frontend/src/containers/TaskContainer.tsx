@@ -21,8 +21,7 @@ const TaskContainer = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get<Task[]>(API_TASKS_ENDPOINT);
-                console.log("Fetched tasks:", response.data); // Debugging log
+                const response = await axios.get<Task[]>(API_TASKS_ENDPOINT, {withCredentials: true});
                 setTasks(response.data);
             } catch (error) {
                 console.error("Error fetching tasks:", error);
@@ -35,13 +34,11 @@ const TaskContainer = () => {
         if (!task) return;
 
         try {
-            console.log("Adding task:", task); // Debugging log
             const response = await axios.post<Task>(
                 API_TASKS_ENDPOINT,
                 { title: task },
-                { headers: { "Content-Type": "application/json" } }
+                { headers: { "Content-Type": "application/json" }, withCredentials: true }
             );
-            console.log("Task added response:", response.data);
             setTasks([...tasks, response.data]);
             setTask("");
         } catch (error) {
@@ -51,7 +48,7 @@ const TaskContainer = () => {
 
     const deleteTask = async (id: string) => {
         try {
-            await axios.delete(`${API_TASKS_ENDPOINT}/${id}`);
+            await axios.delete(`${API_TASKS_ENDPOINT}/${id}`, {withCredentials: true});
             setTasks(tasks.filter((t) => t._id !== id));
         } catch (error) {
             console.error("Error deleting task:", error);
@@ -63,7 +60,7 @@ const TaskContainer = () => {
             const response = await axios.put(
                 `${API_TASKS_ENDPOINT}/${id}`,
                 updatedTask,
-                { headers: { "Content-Type": "application/json" } }
+                { headers: { "Content-Type": "application/json" }, withCredentials: true }
             );
 
             setTasks(

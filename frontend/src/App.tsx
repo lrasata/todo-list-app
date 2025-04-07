@@ -1,34 +1,25 @@
-import TaskContainer from "./containers/TaskContainer.tsx";
-import {createTheme, ThemeProvider} from "@mui/material";
-import Container from '@mui/material/Container';
+import MainLayout from "./pages/MainLayout.tsx";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import ErrorPage from "./pages/ErrorPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import Homepage from "./pages/Homepage.tsx";
+import SignUpPage from "./pages/SignUpPage.tsx";
 
-const theme = createTheme({
-    typography: {
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-        ].join(','),
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <MainLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            {index: true, element: <Homepage />},
+            {path: 'login', element: <LoginPage />},
+            {path: 'signup', element: <SignUpPage />}
+        ],
     }
-});
+]);
 
 const App = () => {
-
-    return (
-        <ThemeProvider theme={theme}>
-            <Container maxWidth="md">
-                <TaskContainer />
-            </Container>
-        </ThemeProvider>
-
-    );
+    return (<RouterProvider router={router}/>)
 };
 
 export default App;
