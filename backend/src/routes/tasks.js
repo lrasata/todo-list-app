@@ -1,60 +1,15 @@
 const express = require("express");
-const Task = require("../model/Task");
+const {getAllTasks, createTask, deleteTask, updateTask} = require("../controllers/task-controller");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    try {
-        const tasks = await Task.find();
-        res.json(tasks);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
+// routes for Task management
+router.get("/", getAllTasks);
 
+router.post("/", createTask);
 
-router.post("/", async (req, res) => {
-    const { title } = req.body;
-    console.log("Received title:", title); // Debugging log
+router.delete("/:id", deleteTask);
 
-    if (!title) {
-        return res.status(400).json({ error: "Task title is required" });
-    }
-
-    try {
-        const newTask = new Task({ title });
-        await newTask.save();
-        res.status(201).json(newTask);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).json({ error: err.message });
-    }
-});
-
-router.delete("/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        await Task.findByIdAndDelete(id);
-        res.json({ message: "Task deleted" });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-
-router.put("/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        const updatedTask = await Task.findByIdAndUpdate(
-            id,
-            req.body,
-            { new: true } // Return the updated task
-        );
-        res.json(updatedTask);
-    } catch (error) {
-        res.status(500).json({ error: "Error updating task" });
-    }
-});
+router.put("/:id", updateTask);
 
 module.exports = router;
