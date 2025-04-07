@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {API_TASKS_ENDPOINT} from "../constants/constants.ts";
-import TodoList from "../components/TodoList.tsx";
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import {API_TASKS_ENDPOINT} from '../constants/constants.ts';
+import TodoList from '../components/TodoList.tsx';
 import Typography from '@mui/material/Typography';
-import {Box, Button, TextField} from "@mui/material";
+import {Box, Button, TextField} from '@mui/material';
 
 
 interface Task {
@@ -93,12 +93,12 @@ const TaskContainer = () => {
                 <TextField
                     value={task}
                     onChange={(e) => setTask(e.target.value)}
-                    sx={{ mr: 2 }}
+                    sx={{ mr: 2, backgroundColor: 'white' }}
                     placeholder="Enter task description"
                     size="small"
                     fullWidth
                 />
-                <Button size="small" variant="contained" onClick={addTask}>Add</Button>
+                <Button variant="contained" onClick={addTask} aria-label="Add task">Add</Button>
             </Box>
             <TodoList
                 tasks={tasks}
