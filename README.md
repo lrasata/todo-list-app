@@ -5,6 +5,9 @@ TODO list of improvements
 
 **V1 - improvements**
 
-- [ ] improve User interface on Mobile device
+- [x] improve User interface on Mobile device
+- [x] Add authenticated user experience
+- [ ] Improve authenticated UX
 - [ ] Add User model - Each user should only be able to see its own tasks
-- [ ] Add authenticated user experience
+
+
