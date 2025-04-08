@@ -10,7 +10,7 @@ module.exports = {
                 .json({message: "Your are not authorized to perform this action"});
         }
         try {
-            jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+            jwt.verify(token, process.env.JWT_SECRET, async (err, data) => {
                 if (err) {
                     return res.status(403)
                         .json({message: "Your are not authorized to perform this action"});
@@ -33,7 +33,7 @@ module.exports = {
         const token = req.cookies.token;
         if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
         try {
-            const userVerified = jwt.verify(token, process.env.TOKEN_KEY);
+            const userVerified = jwt.verify(token, process.env.JWT_SECRET);
             req.user = await User.findById(userVerified.id)
             next();
         } catch (e) {

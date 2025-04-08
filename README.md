@@ -1,14 +1,77 @@
-# TODO List App - MERN stack application 
-> Project under construction 
+# My TODO List App - MERN stack application 
 
-TODO list of improvements
+This project is a full-stack application built with `MongoDB, Express, React and Node.js`. 
+The purpose of this project is to serve as a training to get familiar with those technologies.
 
-**V1 - improvements**
+## Features
+### Users can Sign Up or Log in
+<img src="./docs/signup.png" alt="signup" width="400">
+<img src="./docs/login.png" alt="login" width="450">
 
-- [x] improve User interface on Mobile device
-- [x] Add authenticated user experience
-- [x] Improve authenticated UX
-- [ ] Add User model - Each user should only be able to see its own tasks
-- [ ] some refactoring - a couple of places where DRY principle could be applied
+### Users can only view and modify their own tasks
+<img src="./docs/todolist.png" alt="todolist" width="450">
+
+## Backend
+
+### Prerequisites
+Provide in the `.env` the MongoDB uri and a JWT secret for JWT generation
+
+```
+MONGO_URI=
+JWT_SECRET=
+```
+
+### Installation and Setup Instructions
+
+You will need `node` and `npm` installed globally on your machine.
+
+Move to frontend folder:
+`cd ./backend`
+
+Installation:
+
+`npm install`
 
 
+To Start Server:
+
+`npm start`
+
+Server is running on PORT:
+
+`http://localhost:8080/`
+
+## Frontend
+
+### Prerequisites
+Provide in the `.env` the backend url.
+
+```
+VITE_BACKEND_API_URL=http://localhost:8080
+```
+
+### Installation and Setup Instructions
+
+You will need `node` and `npm` installed globally on your machine.
+
+Move to frontend folder:
+`cd ./frontend`
+
+Installation:
+
+`npm install`
+
+
+To Start Server:
+
+`npm run dev`
+
+To Visit App:
+
+`http://localhost:5173/`
+
+### Acknowledgement
+This project took string inspiration from the following resources :
+- https://www.freecodecamp.org/news/how-to-build-a-mern-stack-to-do-app/
+- https://www.freecodecamp.org/news/how-to-secure-your-mern-stack-application/
+- https://medium.com/@neelriteshyadav/setting-up-protected-routes-in-a-mern-stack-application-a51c37a53762
