@@ -6,6 +6,7 @@ import {API_LOGIN_ENDPOINT} from "../constants/constants.ts";
 import Typography from "@mui/material/Typography";
 import {Box, Button, Card, useTheme, TextField, useMediaQuery} from "@mui/material";
 import {useCookies} from "react-cookie";
+import Brand from "../components/Brand.tsx";
 
 const LoginPage = () => {
     const theme = useTheme();
@@ -67,12 +68,13 @@ const LoginPage = () => {
     return (
         <>
             <Card>
+                <Brand />
                 <Box
                     component="form"
                     onSubmit={handleSubmit}
                     sx={{ display: "flex", flexDirection: "column", gap: 3, padding: 3 }}
                 >
-                    <Typography variant="h4" component="h1">Log in</Typography>
+                    <Typography variant="h5" component="h1">Log in</Typography>
                     <TextField
                         type="email"
                         name="email"

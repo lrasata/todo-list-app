@@ -93,7 +93,7 @@ const TaskContainer = () => {
 
     return (
         <Box my={3}>
-            <Typography variant="h2" component="h1">My Todo List</Typography>
+            <Typography variant="h3" component="h1">My Todo List</Typography>
             <Box display="flex" flexDirection="row" my={3}>
                 <TextField
                     value={task}

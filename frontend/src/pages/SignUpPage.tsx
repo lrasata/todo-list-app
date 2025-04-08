@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import {API_SIGN_UP_ENDPOINT} from "../constants/constants.ts";
 import {Box, Button, Card, TextField, useMediaQuery, useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import Brand from "../components/Brand.tsx";
 
 const SignUpPage = () => {
     const theme = useTheme();
@@ -60,12 +61,13 @@ const SignUpPage = () => {
     return (
         <>
             <Card>
+                <Brand />
                 <Box
                     component="form"
                     onSubmit={handleSubmit}
                     sx={{ display: "flex", flexDirection: "column", gap: 3, padding: 3 }}
                 >
-                    <Typography variant="h4" component="h1">Sign up</Typography>
+                    <Typography variant="h5" component="h1">Sign up</Typography>
                     <TextField
                         type="email"
                         name="email"
