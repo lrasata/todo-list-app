@@ -1,14 +1,17 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import {API_LOGIN_ENDPOINT} from "../constants/constants.ts";
 import Typography from "@mui/material/Typography";
 import {Box, Button, Card, useTheme, TextField, useMediaQuery} from "@mui/material";
+import {useCookies} from "react-cookie";
 
 const LoginPage = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    // @ts-ignore
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState({
@@ -16,6 +19,11 @@ const LoginPage = () => {
         password: "",
     });
     const { email, password } = inputValue;
+
+    useEffect(() => {
+        removeCookie("token");
+    }, [])
+
     const handleOnChange = (e: { target: { name: string; value: string; }; }) => {
         const { name, value } = e.target;
         setInputValue({
@@ -47,20 +55,13 @@ const LoginPage = () => {
             const { success, message } = data;
             if (success) {
                 handleSuccess(message);
-                setTimeout(() => {
-                    navigate("/");
-                }, 1000);
+                navigate("/");
             } else {
                 handleError(message);
             }
         } catch (error) {
             console.log(error);
         }
-        setInputValue({
-            ...inputValue,
-            email: "",
-            password: "",
-        });
     };
 
     return (

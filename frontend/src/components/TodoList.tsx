@@ -3,17 +3,12 @@ import {Box, Button, Card, Checkbox, IconButton, Stack, TextField} from "@mui/ma
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import {ITask} from "../types/types.ts";
 
-interface Task {
-    _id: string; // Unique ID for the task
-    title: string; // Task name
-    completed: boolean; // True if done, False if not
-}
-
-interface TodoListProps {
-    tasks: Task[];
+interface ITodoList {
+    tasks: ITask[];
     deleteTask: (id: string) => void;
-    updateTask: (id: string, updatedTask: Partial<Task>) => void;
+    updateTask: (id: string, updatedTask: Partial<ITask>) => void;
     editingTitle: string;
     setEditingTitle: (title: string) => void;
     editingTaskId: string | null;
@@ -33,7 +28,7 @@ const TodoList = ({
                       setEditingTaskId,
                       startEditing,
                       handleEditChange,
-                  }: TodoListProps) => {
+                  }: ITodoList) => {
 
     return (
         <>

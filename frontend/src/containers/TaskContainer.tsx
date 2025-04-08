@@ -4,16 +4,12 @@ import {API_TASKS_ENDPOINT} from '../constants/constants.ts';
 import TodoList from '../components/TodoList.tsx';
 import Typography from '@mui/material/Typography';
 import {Box, Button, TextField} from '@mui/material';
+import {ITask} from "../types/types.ts";
+import {toast} from "react-toastify";
 
-
-interface Task {
-    _id: string;
-    title: string;
-    completed: boolean;
-}
 
 const TaskContainer = () => {
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setTasks] = useState<ITask[]>([]);
     const [task, setTask] = useState<string>("");
     const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
     const [editingTitle, setEditingTitle] = useState<string>("");
@@ -21,10 +17,13 @@ const TaskContainer = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get<Task[]>(API_TASKS_ENDPOINT, {withCredentials: true});
+                const response = await axios.get<ITask[]>(API_TASKS_ENDPOINT, {withCredentials: true});
                 setTasks(response.data);
             } catch (error) {
                 console.error("Error fetching tasks:", error);
+                toast.error(`Error fetching tasks ${error}`, {
+                    position: "top-left",
+                });
             }
         };
         fetchTasks();
@@ -34,7 +33,7 @@ const TaskContainer = () => {
         if (!task) return;
 
         try {
-            const response = await axios.post<Task>(
+            const response = await axios.post<ITask>(
                 API_TASKS_ENDPOINT,
                 { title: task },
                 { headers: { "Content-Type": "application/json" }, withCredentials: true }
@@ -43,6 +42,9 @@ const TaskContainer = () => {
             setTask("");
         } catch (error) {
             console.error("Error adding task:", error);
+            toast.error(`Error adding task: ${error}`, {
+                position: "top-left",
+            });
         }
     };
 
@@ -52,10 +54,13 @@ const TaskContainer = () => {
             setTasks(tasks.filter((t) => t._id !== id));
         } catch (error) {
             console.error("Error deleting task:", error);
+            toast.error(`Error deleting task: ${error}`, {
+                position: "top-left",
+            });
         }
     };
 
-    const updateTask = async (id: string, updatedTask: Partial<Task>) => {
+    const updateTask = async (id: string, updatedTask: Partial<ITask>) => {
         try {
             const response = await axios.put(
                 `${API_TASKS_ENDPOINT}/${id}`,
@@ -72,6 +77,9 @@ const TaskContainer = () => {
             setEditingTitle("");
         } catch (error) {
             console.error("Error updating task:", error);
+            toast.error(`Error updating task: ${error}`, {
+                position: "top-left",
+            });
         }
     };
 

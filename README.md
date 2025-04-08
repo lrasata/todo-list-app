@@ -7,7 +7,8 @@ TODO list of improvements
 
 - [x] improve User interface on Mobile device
 - [x] Add authenticated user experience
-- [ ] Improve authenticated UX
+- [x] Improve authenticated UX
 - [ ] Add User model - Each user should only be able to see its own tasks
+- [ ] some refactoring - a couple of places where DRY principle could be applied
 
 
