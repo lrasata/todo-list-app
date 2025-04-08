@@ -5,8 +5,8 @@ The purpose of this project is to serve as a training to get familiar with those
 
 ## Features
 ### Users can Sign Up or Log in
-<img src="./docs/signup.png" alt="signup" width="400">
-<img src="./docs/login.png" alt="login" width="450">
+<img src="./docs/signup.png" alt="signup" width="300">
+<img src="./docs/login.png" alt="login" width="350">
 
 ### Users can only view and modify their own tasks
 <img src="./docs/todolist.png" alt="todolist" width="450">
