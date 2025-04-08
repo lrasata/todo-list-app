@@ -11,6 +11,12 @@ The purpose of this project is to serve as a training to get familiar with those
 ### Users can only view and modify their own tasks
 <img src="./docs/todolist.png" alt="todolist" width="450">
 
+### Future imrpovements
+- [ ] Add a date of completion to Task and highlight when a Task is overdue
+- [ ] Improve the Task view to show tasks per date
+- [ ] User can create a category and assign it to its tasks
+- [ ] User is then after to filter the Task views per category
+
 ## Backend
 
 ### Prerequisites
