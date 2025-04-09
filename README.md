@@ -19,9 +19,9 @@ The purpose of this project is to serve as a training to get familiar with those
 ### Future imrpovements
 - [x] ~~Add a date of completion to Task~~
 - [x] ~~Highlight when a Task is overdue~~
-- [ ] Improve the Task view to show tasks per date and also per status : completed or not
+- [ ] Improve the Task view to show only the task for today on the landing page + alert if any overdue tasks - create a 2nd page for overdue tasks - create a 3rd for viewing all tasks
 - [ ] User can create a category and assign it to its tasks
-- [ ] User is then after to filter the Task views per category
+- [ ] User is able to filter the tasks on the page for viewing all tasks page with search text, filter per category or date.
 
 ## Backend
 
