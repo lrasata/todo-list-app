@@ -15,8 +15,9 @@ The purpose of this project is to serve as a training to get familiar with those
 
 
 ### Future imrpovements
-- [ ] Add a date of completion to Task and highlight when a Task is overdue
-- [ ] Improve the Task view to show tasks per date
+- [x] ~~Add a date of completion to Task~~
+- [ ] Highlight when a Task is overdue
+- [ ] Improve the Task view to show tasks per date and also per status : completed or not
 - [ ] User can create a category and assign it to its tasks
 - [ ] User is then after to filter the Task views per category
 

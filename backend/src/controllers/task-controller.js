@@ -10,7 +10,7 @@ module.exports = {
         }
     },
     createTask: async (req, res) => {
-        const { title } = req.body;
+        const { title, taskDate } = req.body;
 
         if (!title) {
             return res.status(400).json({ error: "Task title is required" });
@@ -19,6 +19,7 @@ module.exports = {
         try {
             const newTask = new Task({
                 title,
+                taskDate,
                 user: { // link currently authenticated user to the task
                     username: req.user.username,
                     userId: req.user
