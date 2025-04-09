@@ -5,11 +5,17 @@ The purpose of this project is to serve as a training to get familiar with those
 
 ## Features
 ### Users can Sign Up or Log in
-<img src="./docs/signup.png" alt="signup" width="300"><img src="./docs/login.png" alt="login" width="350">
+<img src="./docs/signup.png" alt="signup" height="300">
+<img src="./docs/mobile-signup.png" alt="mobile-signup" height="300">
+
+<img src="./docs/login.png" alt="login" height="300">
+<img src="./docs/mobile-login.png" alt="mobile-login" height="300">
 
 
 ### Users can only view and modify their own tasks
-<img src="./docs/todolist.png" alt="todolist" width="450">
+<img src="./docs/todolist.png" alt="todolist" height="450">
+<img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="450">
+
 
 ### Future imrpovements
 - [ ] Add a date of completion to Task and highlight when a Task is overdue

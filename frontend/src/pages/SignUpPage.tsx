@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import {API_SIGN_UP_ENDPOINT} from "../constants/constants.ts";
-import {Box, Button, Card, TextField, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Button, TextField, useMediaQuery, useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Brand from "../components/Brand.tsx";
 
@@ -60,44 +60,46 @@ const SignUpPage = () => {
 
     return (
         <>
-            <Card>
-                <Brand />
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    sx={{ display: "flex", flexDirection: "column", gap: 3, padding: 3 }}
-                >
-                    <Typography variant="h5" component="h1">Sign up</Typography>
-                    <TextField
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleOnChange}
-                        placeholder="Enter your email"
-                        label="Email"
-                    />
-                    <TextField
-                        type="text"
-                        name="username"
-                        value={username}
-                        placeholder="Enter your username"
-                        label="Username"
-                        onChange={handleOnChange}
-                    />
-                    <TextField
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Enter your password"
-                        onChange={handleOnChange}
-                        label="Password"
-                    />
-                    <Box display="flex" flexDirection="column" gap={2} justifyContent="center" alignItems="center">
-                        <Button variant="contained" type="submit" fullWidth={isMobile}>Submit</Button>
-                        <Typography>Already have an account? <Link to={"/login"}>Login</Link></Typography>
-                    </Box>
+
+            <Brand />
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{ display: "flex", flexDirection: "column", gap: 3, padding: 3 }}
+            >
+                <Typography variant="h5" component="h1">Sign up</Typography>
+                <TextField
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={handleOnChange}
+                    placeholder="Enter your email"
+                    label="Email"
+                    sx={{ backgroundColor: "white" }}
+                />
+                <TextField
+                    type="text"
+                    name="username"
+                    value={username}
+                    placeholder="Enter your username"
+                    label="Username"
+                    onChange={handleOnChange}
+                    sx={{ backgroundColor: "white" }}
+                />
+                <TextField
+                    type="password"
+                    name="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={handleOnChange}
+                    label="Password"
+                    sx={{ backgroundColor: "white" }}
+                />
+                <Box display="flex" flexDirection="column" gap={2} justifyContent="center" alignItems="center">
+                    <Button variant="contained" type="submit" fullWidth={isMobile}>Submit</Button>
+                    <Typography>Already have an account? <Link to={"/login"}>Log in</Link></Typography>
                 </Box>
-            </Card>
+            </Box>
             <ToastContainer />
         </>
     );

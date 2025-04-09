@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import {API_LOGIN_ENDPOINT} from "../constants/constants.ts";
 import Typography from "@mui/material/Typography";
-import {Box, Button, Card, useTheme, TextField, useMediaQuery} from "@mui/material";
+import {Box, Button, useTheme, TextField, useMediaQuery} from "@mui/material";
 import {useCookies} from "react-cookie";
 import Brand from "../components/Brand.tsx";
 
@@ -67,36 +67,36 @@ const LoginPage = () => {
 
     return (
         <>
-            <Card>
-                <Brand />
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    sx={{ display: "flex", flexDirection: "column", gap: 3, padding: 3 }}
-                >
-                    <Typography variant="h5" component="h1">Log in</Typography>
-                    <TextField
-                        type="email"
-                        name="email"
-                        value={email}
-                        placeholder="Enter your email"
-                        onChange={handleOnChange}
-                        label="Email"
-                    />
-                    <TextField
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Enter your password"
-                        onChange={handleOnChange}
-                        label="Password"
-                    />
-                    <Box display="flex" flexDirection="column" gap={2} justifyContent="center" alignItems="center">
-                        <Button variant="contained" type="submit" fullWidth={isMobile}>Submit</Button>
-                        <Typography>Already have an account? <Link to={"/signup"}>Signup</Link></Typography>
-                    </Box>
+            <Brand />
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{ display: "flex", flexDirection: "column", gap: 3, padding: 3 }}
+            >
+                <Typography variant="h5" component="h1">Log in</Typography>
+                <TextField
+                    type="email"
+                    name="email"
+                    value={email}
+                    placeholder="Enter your email"
+                    onChange={handleOnChange}
+                    label="Email"
+                    sx={{ backgroundColor: "white" }}
+                />
+                <TextField
+                    type="password"
+                    name="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={handleOnChange}
+                    label="Password"
+                    sx={{ backgroundColor: "white" }}
+                />
+                <Box display="flex" flexDirection="column" gap={2} justifyContent="center" alignItems="center">
+                    <Button variant="contained" type="submit" fullWidth={isMobile}>Submit</Button>
+                    <Typography>Already have an account? <Link to={"/signup"}>Signup</Link></Typography>
                 </Box>
-            </Card>
+            </Box>
             <ToastContainer />
         </>
 
