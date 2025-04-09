@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {API_TASKS_ENDPOINT} from '../constants/constants.ts';
 import TodoList from '../components/TodoList.tsx';
-import Typography from '@mui/material/Typography';
 import {Box, Button, TextField} from '@mui/material';
 import {ITask} from "../types/types.ts";
 import {toast} from "react-toastify";
+import Brand from "../components/Brand.tsx";
 
 
 const TaskContainer = () => {
@@ -92,8 +92,8 @@ const TaskContainer = () => {
     };
 
     return (
-        <Box my={3}>
-            <Typography variant="h3" component="h1">My Todo List</Typography>
+        <Box my={1}>
+            <Brand height={200}/>
             <Box display="flex" flexDirection="row" my={3}>
                 <TextField
                     value={task}
