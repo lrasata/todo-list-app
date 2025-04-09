@@ -1,5 +1,7 @@
 # My TODO List App - MERN stack application 
 
+> Project status is in progress
+
 This project is a full-stack application built with `MongoDB, Express, React and Node.js`. 
 The purpose of this project is to serve as a training to get familiar with those technologies.
 
@@ -16,7 +18,7 @@ The purpose of this project is to serve as a training to get familiar with those
 
 ### Future imrpovements
 - [x] ~~Add a date of completion to Task~~
-- [ ] Highlight when a Task is overdue
+- [x] ~~Highlight when a Task is overdue~~
 - [ ] Improve the Task view to show tasks per date and also per status : completed or not
 - [ ] User can create a category and assign it to its tasks
 - [ ] User is then after to filter the Task views per category
