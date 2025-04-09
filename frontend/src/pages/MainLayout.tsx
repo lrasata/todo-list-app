@@ -24,7 +24,7 @@ const MainLayout = () => {
     return (
         <ThemeProvider theme={theme}>
             <CookiesProvider defaultSetOptions={{ path: '/' }}>
-                <Container maxWidth="md"><Outlet /></Container>
+                <Container maxWidth="md" sx={{ my: 4}}><Outlet /></Container>
             </CookiesProvider>
         </ThemeProvider>
     );
