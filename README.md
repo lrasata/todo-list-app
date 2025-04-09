@@ -5,16 +5,13 @@ The purpose of this project is to serve as a training to get familiar with those
 
 ## Features
 ### Users can Sign Up or Log in
-<img src="./docs/signup.png" alt="signup" height="200">
-<img src="./docs/mobile-signup.png" alt="mobile-signup" height="200">
+<img src="./docs/signup.png" alt="signup" height="200"><img src="./docs/mobile-signup.png" alt="mobile-signup" height="200">
 
-<img src="./docs/login.png" alt="login" height="200">
-<img src="./docs/mobile-login.png" alt="mobile-login" height="200">
+<img src="./docs/login.png" alt="login" height="200"><img src="./docs/mobile-login.png" alt="mobile-login" height="200">
 
 
 ### Users can only view and modify their own tasks
-<img src="./docs/todolist.png" alt="todolist" height="300">
-<img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="300">
+<img src="./docs/todolist.png" alt="todolist" height="300"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="300">
 
 
 ### Future imrpovements
