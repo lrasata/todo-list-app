@@ -7,21 +7,21 @@ The purpose of this project is to serve as a training to get familiar with those
 
 ## Features
 ### Users can Sign Up or Log in
-<img src="./docs/signup.png" alt="signup" height="200"><img src="./docs/mobile-signup.png" alt="mobile-signup" height="200">
+<img src="./docs/signup.png" alt="signup" height="400"><img src="./docs/mobile-signup.png" alt="mobile-signup" height="400">
 
-<img src="./docs/login.png" alt="login" height="200"><img src="./docs/mobile-login.png" alt="mobile-login" height="200">
+<img src="./docs/login.png" alt="login" height="400"><img src="./docs/mobile-login.png" alt="mobile-login" height="400">
 
 
 ### Users can only view and modify their own tasks
-<img src="./docs/todolist.png" alt="todolist" height="300"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="300">
+<img src="./docs/todolist.png" alt="todolist" height="400"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="400">
 
 
 ### Future imrpovements
 - [x] ~~Add a date of completion to Task~~
 - [x] ~~Highlight when a Task is overdue~~
-- [ ] Improve the Task view to show tasks per date and also per status : completed or not
+- [ ] Improve the Task view to show only the task for today on the landing page + alert if any overdue tasks - create a 2nd page for overdue tasks - create a 3rd for viewing all tasks
 - [ ] User can create a category and assign it to its tasks
-- [ ] User is then after to filter the Task views per category
+- [ ] User is able to filter the tasks on the page for viewing all tasks page with search text, filter per category or date.
 
 ## Backend
 
