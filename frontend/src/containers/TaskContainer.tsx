@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {API_TASKS_ENDPOINT} from '../constants/constants.ts';
+import {API_TASKS_DUE_TODAY, API_TASKS_ENDPOINT} from '../constants/constants.ts';
 import TodoList from '../components/TodoList.tsx';
 import {
     Accordion,
@@ -35,7 +35,7 @@ const TaskContainer = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get<ITask[]>(API_TASKS_ENDPOINT, {withCredentials: true});
+                const response = await axios.get<ITask[]>(API_TASKS_DUE_TODAY, {withCredentials: true});
                 setTasks(response.data);
             } catch (error) {
                 console.error("Error fetching tasks:", error);
@@ -117,6 +117,22 @@ const TaskContainer = () => {
     return (
         <Box my={1}>
             <Brand height={200}/>
+            <Typography variant="h5" component="h2" gutterBottom my={2}>Your planned tasks for today</Typography>
+            <TodoList
+                tasks={tasks}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+                editingTitle={editingTitle}
+                setEditingTitle={setEditingTitle}
+                editingTaskDate={editingTaskDate}
+                setEditingTaskDate={setEditingTaskDate}
+                editingTaskId={editingTaskId}
+                setEditingTaskId={setEditingTaskId}
+                startEditing={startEditing}
+                handleTitleEditChange={handleEditTitleChange}
+                handleTaskDateEditChange={handleTaskDateEditChange}
+            />
+
             <Accordion sx={{ my: 3 }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -144,21 +160,6 @@ const TaskContainer = () => {
                     </Stack>
                 </AccordionDetails>
             </Accordion>
-
-            <TodoList
-                tasks={tasks}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-                editingTitle={editingTitle}
-                setEditingTitle={setEditingTitle}
-                editingTaskDate={editingTaskDate}
-                setEditingTaskDate={setEditingTaskDate}
-                editingTaskId={editingTaskId}
-                setEditingTaskId={setEditingTaskId}
-                startEditing={startEditing}
-                handleTitleEditChange={handleEditTitleChange}
-                handleTaskDateEditChange={handleTaskDateEditChange}
-            />
         </Box>
     );
 
