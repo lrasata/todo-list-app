@@ -19,6 +19,7 @@ interface ITodoList {
     startEditing: (id: string) => void;
     handleTitleEditChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleTaskDateEditChange: (date: Dayjs | null) => void;
+    displayDate: boolean;
 }
 
 
@@ -35,6 +36,7 @@ const TodoList = ({
                       startEditing,
                       handleTitleEditChange,
                       handleTaskDateEditChange,
+                      displayDate = true,
                   }: ITodoList) => {
     // TODO refactor to avoid props drilling
     return (
@@ -52,7 +54,7 @@ const TodoList = ({
                                           startEditing={startEditing}
                                           deleteTask={deleteTask}
                                           setEditingTitle={setEditingTitle} setEditingTaskDate={setEditingTaskDate}
-                                          displayDate={false}
+                                          displayDate={displayDate}
                         />
                     )}
                 </Card>

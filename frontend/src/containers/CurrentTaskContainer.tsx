@@ -23,7 +23,7 @@ import dayjs, {Dayjs} from "dayjs";
 import AlertOverdueTasksContainer from "./AlertOverdueTasksContainer.tsx";
 
 
-const TaskContainer = () => {
+const CurrentTaskContainer = () => {
     const initialValue = { title: "", completed: false, taskDate: null }
     const [tasks, setTasks] = useState<ITask[]>([]);
     const [currentTask, setCurrentTask] = useState<Pick<ITask, "title" | "completed" | "taskDate">>(initialValue);
@@ -133,6 +133,7 @@ const TaskContainer = () => {
                 startEditing={startEditing}
                 handleTitleEditChange={handleEditTitleChange}
                 handleTaskDateEditChange={handleTaskDateEditChange}
+                displayDate={false}
             />
 
             <Accordion sx={{ my: 3 }}>
@@ -167,4 +168,4 @@ const TaskContainer = () => {
 
 }
 
-export default TaskContainer;
+export default CurrentTaskContainer;

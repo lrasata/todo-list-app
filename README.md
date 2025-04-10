@@ -1,6 +1,6 @@
 # My TODO List App - MERN stack application 
 
-> Project status is in progress
+> Please note that this **Project is under construction** 
 
 This project is a full-stack application built with `MongoDB, Express, React and Node.js`. 
 The purpose of this project is to serve as a training to get familiar with those technologies.
@@ -16,10 +16,13 @@ The purpose of this project is to serve as a training to get familiar with those
 <img src="./docs/todolist.png" alt="todolist" height="400"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="400">
 
 
-### Future imrpovements
+### Ongoing imrpovements
 - [x] ~~Add a date of completion to Task~~
 - [x] ~~Highlight when a Task is overdue~~
-- [ ] Improve the Task view to show only the task for today on the landing page + alert if any overdue tasks - create a 2nd page for overdue tasks - create a 3rd for viewing all tasks
+- [x] ~~Improve the Task view to show only the task for today on the landing page + alert if any overdue tasks~~
+- [ ] Optimise by using Redux to avoid props drilling and avoid API requests when switching from one page to another
+- [ ] create a 2nd page for overdue tasks
+- [x] ~~create a 3rd for viewing all tasks~~
 - [ ] User can create a category and assign it to its tasks
 - [ ] User is able to filter the tasks on the page for viewing all tasks page with search text, filter per category or date.
 
