@@ -12,6 +12,11 @@ module.exports = {
             filter = {...filter, taskDate:{"$gte": currentDate, "$lt": dateTomorrow}};
         }
 
+        if (dueDate === 'past') {
+            const currentDate = new Date(new Date().setHours(0,0,0,0)); // today's date at midnight
+            filter = {...filter, taskDate:{"$lt": currentDate}};
+        }
+
         try {
             const tasks = await Task.find(filter);
             res.json(tasks);

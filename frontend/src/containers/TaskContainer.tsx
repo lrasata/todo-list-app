@@ -20,6 +20,7 @@ import BasicDatePicker from "../components/BasicDatePicker.tsx";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import dayjs, {Dayjs} from "dayjs";
+import AlertOverdueTasksContainer from "./AlertOverdueTasksContainer.tsx";
 
 
 const TaskContainer = () => {
@@ -118,6 +119,7 @@ const TaskContainer = () => {
         <Box my={1}>
             <Brand height={200}/>
             <Typography variant="h5" component="h2" gutterBottom my={2}>Your planned tasks for today</Typography>
+            <AlertOverdueTasksContainer />
             <TodoList
                 tasks={tasks}
                 deleteTask={deleteTask}

@@ -51,7 +51,9 @@ const TodoList = ({
                                           updateTask={updateTask}
                                           startEditing={startEditing}
                                           deleteTask={deleteTask}
-                                          setEditingTitle={setEditingTitle} setEditingTaskDate={setEditingTaskDate}/>
+                                          setEditingTitle={setEditingTitle} setEditingTaskDate={setEditingTaskDate}
+                                          displayDate={false}
+                        />
                     )}
                 </Card>
             })}

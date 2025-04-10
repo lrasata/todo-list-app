@@ -13,6 +13,7 @@ interface TaskCardProps {
     deleteTask: (id: string) => void;
     setEditingTitle: (title: string) => void;
     setEditingTaskDate: (date: Dayjs) => void;
+    displayDate: boolean;
 }
 
 const TaskCardContent = ({
@@ -21,13 +22,14 @@ const TaskCardContent = ({
                              startEditing,
                              deleteTask,
                              setEditingTitle,
-                             setEditingTaskDate
+                             setEditingTaskDate,
+                             displayDate,
                          }: TaskCardProps) => {
     const label = {inputProps: {'aria-label': task.title}};
 
     return (
         <>
-            {task.taskDate && <DateChip dateLabel={task.taskDate.toString()}/>}
+            {task.taskDate && displayDate && <DateChip dateLabel={task.taskDate.toString()}/>}
             <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" mt={1}>
                 <Box display="flex" flexDirection="row" alignItems="center">
                     <Checkbox {...label}
