@@ -13,16 +13,16 @@ The purpose of this project is to serve as a training to get familiar with those
 <img src="./docs/todolist.png" alt="todolist" height="350"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="350">
 
 
-### Ongoing imrpovements
+### Ongoing improvements
 - [x] ~~Add a date of completion to Task~~
 - [x] ~~Highlight when a Task is overdue~~
 - [x] ~~Improve the Task view to show only the task for today on the landing page + alert if any overdue tasks~~
 - [x] ~~Optimise by using Redux to avoid props drilling and avoid API requests when switching from one page to another~~
-- [ ] create a 2nd page for overdue tasks
+- [x] create a 2nd page for overdue tasks
 - [ ] Fix issue on MainNavigation when reloading a different page than the homepage
 - [x] ~~create a 3rd for viewing all tasks~~
 - [ ] User can create a category and assign it to its tasks
-- [ ] User is able to filter the tasks on the page for viewing all tasks page with search text, filter per category or date.
+- [ ] User is able to filter tasks on the page for viewing all tasks page with search text, filter per category or date.
 - [ ] Fix issue toastify notification appears twice
 
 ## Backend

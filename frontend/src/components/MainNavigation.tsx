@@ -10,16 +10,22 @@ const MainNavigation = () => {
     const handleChange = (_: SyntheticEvent, newValue: number) => {
         setValue(newValue);
         if (newValue === 1) {
-            navigate("/all-tasks");
+            navigate("/overdue-tasks");
         } else {
-            navigate("/");
+            if (newValue === 2) {
+                navigate("/all-tasks");
+            } else {
+                navigate("/");
+            }
         }
+
     };
 
     return (
         <Box justifyContent="center" flexDirection="row" display="flex">
             <Tabs value={value} onChange={handleChange} aria-label="main navigation">
                 <Tab label="Home"/>
+                <Tab label="Overdue tasks" />
                 <Tab label="All tasks" />
             </Tabs>
         </Box>
