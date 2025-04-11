@@ -12,6 +12,8 @@ The purpose of this project is to serve as a training to get familiar with those
 ### Users can only view and modify their own tasks
 <img src="./docs/todolist.png" alt="todolist" height="350"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="350">
 
+<img src="./docs/all-tasks.png" alt="all-tasks" height="350"><img src="./docs/mobile-all-tasks.png" alt="mobile-all-tasks" height="350">
+
 
 ### Ongoing improvements
 - [x] ~~Add a date of completion to Task~~
