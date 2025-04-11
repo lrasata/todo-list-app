@@ -5,7 +5,7 @@ import MainNavigation from "../components/MainNavigation.tsx";
 import LogOutButtonContainer from "../containers/LogOutButtonContainer.tsx";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {fetchAllTasks, fetchDueTodayTasks} from "../redux-store/tasks-slice.ts";
+import {fetchAllTasks, fetchDueTodayTasks, fetchOverdueTasks} from "../redux-store/tasks-slice.ts";
 
 const theme = createTheme({
     typography: {
@@ -33,6 +33,8 @@ const MainLayout = () => {
         dispatch(fetchDueTodayTasks());
         // @ts-ignore
         dispatch(fetchAllTasks());
+        // @ts-ignore
+        dispatch(fetchOverdueTasks());
     }, []);
 
     return (

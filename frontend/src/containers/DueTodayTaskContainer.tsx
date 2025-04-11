@@ -47,7 +47,7 @@ const DueTodayTaskContainer = () => {
         <>
             <Brand height={200}/>
             <Typography variant="h5" component="h2" gutterBottom my={2}>Your planned tasks for today</Typography>
-            <AlertOverdueTasksContainer/>
+            <AlertOverdueTasksContainer />
             {
                 isLoading ? <Spinner/> : <TodoListContainer tasks={dueTodayTasksSelector} displayDate={false} />
             }

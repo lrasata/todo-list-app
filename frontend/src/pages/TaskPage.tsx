@@ -1,5 +1,4 @@
 import DueTodayTaskContainer from "../containers/DueTodayTaskContainer.tsx";
-import {ToastContainer} from "react-toastify";
 import AllTaskContainer from "../containers/AllTaskContainer.tsx";
 
 interface TaskPageProps {
@@ -15,7 +14,6 @@ const TaskPage = ({ path }: TaskPageProps) => {
             {
                 path === 'all-tasks' && <AllTaskContainer />
             }
-            <ToastContainer />
         </>
 
     );

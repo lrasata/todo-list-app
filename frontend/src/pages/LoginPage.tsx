@@ -52,7 +52,6 @@ const LoginPage = () => {
                 },
                 { withCredentials: true }
             );
-            console.log(data);
             const { success, message } = data;
             if (success) {
                 handleSuccess(message);

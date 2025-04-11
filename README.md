@@ -17,11 +17,13 @@ The purpose of this project is to serve as a training to get familiar with those
 - [x] ~~Add a date of completion to Task~~
 - [x] ~~Highlight when a Task is overdue~~
 - [x] ~~Improve the Task view to show only the task for today on the landing page + alert if any overdue tasks~~
-- [ ] Optimise by using Redux to avoid props drilling and avoid API requests when switching from one page to another
+- [x] ~~Optimise by using Redux to avoid props drilling and avoid API requests when switching from one page to another~~
 - [ ] create a 2nd page for overdue tasks
+- [ ] Fix issue on MainNavigation when reloading a different page than the homepage
 - [x] ~~create a 3rd for viewing all tasks~~
 - [ ] User can create a category and assign it to its tasks
 - [ ] User is able to filter the tasks on the page for viewing all tasks page with search text, filter per category or date.
+- [ ] Fix issue toastify notification appears twice
 
 ## Backend
 
@@ -83,7 +85,7 @@ To Visit App:
 `http://localhost:5173/`
 
 ### Acknowledgement
-This project took string inspiration from the following resources :
+This project took strong inspiration from the following resources :
 - https://www.freecodecamp.org/news/how-to-build-a-mern-stack-to-do-app/
 - https://www.freecodecamp.org/news/how-to-secure-your-mern-stack-application/
 - https://medium.com/@neelriteshyadav/setting-up-protected-routes-in-a-mern-stack-application-a51c37a53762

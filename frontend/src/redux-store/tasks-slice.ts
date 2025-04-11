@@ -1,13 +1,14 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {API_TASKS_DUE_TODAY, API_TASKS_ENDPOINT} from "../constants/constants.ts";
+import {API_TASKS_DUE_TODAY, API_TASKS_ENDPOINT, API_TASKS_OVERDUE} from "../constants/constants.ts";
 import axios from "axios";
 import {ITask} from "../types/types.ts";
-import {dateIsToday} from "../util/util.ts";
+import {dateIsInThePast, dateIsToday} from "../util/util.ts";
 import dayjs from "dayjs";
 
 const initialAllTasksState = {
     allTasks: [],
     dueTodayTasks: [],
+    overdueTasks: [],
     isLoading: false,
     error: null,
 };
@@ -39,6 +40,23 @@ export const fetchDueTodayTasks = createAsyncThunk(
         } catch (error) {
             console.error("Error fetching tasks due today task:", error);
             return rejectWithValue('Oops unable to fetch tasks due today from API');
+        }
+    }
+);
+
+
+export const fetchOverdueTasks = createAsyncThunk(
+    'tasks/fetchOverdueTasks',
+    async ( _, { rejectWithValue }) => {
+
+        try {
+            const response = await axios.get<ITask[]>(API_TASKS_OVERDUE, {withCredentials: true});
+            return {
+                tasks: response.data
+            }
+        } catch (error) {
+            console.error("Error fetching overdue task:", error);
+            return rejectWithValue('Oops unable to fetch overdue tasks from API');
         }
     }
 );
@@ -128,11 +146,17 @@ const tasksSlice = createSlice({
             // @ts-ignore
             state.error = action.error.message
         })
+        builder.addCase(fetchOverdueTasks.fulfilled, (state, action) => {
+            // @ts-ignore
+            state.overdueTasks = action.payload.tasks;
+        })
         builder.addCase(createTask.fulfilled, (state, action) => {
             // @ts-ignore
             state.dueTodayTasks = dateIsToday(dayjs(action.payload.task.taskDate)) ? [action.payload.task, ...state.dueTodayTasks] : [...state.dueTodayTasks];
             // @ts-ignore
             state.allTasks = [action.payload.task, ...state.allTasks];
+            // @ts-ignore
+            state.overdueTasks = dateIsInThePast(dayjs(action.payload.task.taskDate)) ? [action.payload.task, ...state.overdueTasks] : [...state.overdueTasks];
         })
         builder.addCase(updateTask.fulfilled, (state, action) => {
             // @ts-ignore
@@ -143,10 +167,15 @@ const tasksSlice = createSlice({
             state.allTasks = state.allTasks.map((task: ITask) =>
                 task._id === action.payload.task._id ? { ...task, ...action.payload.task } : task
             )
+            // @ts-ignore
+            state.overdueTasks = state.overdueTasks.map((task: ITask) =>
+                task._id === action.payload.task._id ? { ...task, ...action.payload.task } : task
+            )
         })
         builder.addCase(deleteTask.fulfilled, (state, action) => {
             state.dueTodayTasks = state.dueTodayTasks.filter((t: ITask) => t._id !== action.payload.id);
             state.allTasks = state.allTasks.filter((t: ITask) => t._id !== action.payload.id);
+            state.overdueTasks = state.overdueTasks.filter((t: ITask) => t._id !== action.payload.id);
         })
 
     },
