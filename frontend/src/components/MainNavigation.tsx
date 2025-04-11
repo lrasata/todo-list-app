@@ -1,11 +1,23 @@
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 import {Box, Tab, Tabs} from "@mui/material";
-import {SyntheticEvent, useState} from "react";
+import {SyntheticEvent, useEffect, useState} from "react";
 
 const MainNavigation = () => {
     const [value, setValue] = useState(0);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        if (pathname !== '') {
+            if (pathname === '/overdue-tasks'){
+                setValue(1);
+            }
+            if (pathname === '/all-tasks'){
+                setValue(2);
+            }
+        }
+    }, [])
 
     const handleChange = (_: SyntheticEvent, newValue: number) => {
         setValue(newValue);
