@@ -1,4 +1,4 @@
-import CurrentTaskContainer from "../containers/CurrentTaskContainer.tsx";
+import DueTodayTaskContainer from "../containers/DueTodayTaskContainer.tsx";
 import {ToastContainer} from "react-toastify";
 import AllTaskContainer from "../containers/AllTaskContainer.tsx";
 
@@ -10,7 +10,7 @@ const TaskPage = ({ path }: TaskPageProps) => {
     return (
         <>
             {
-                path === '/' && <CurrentTaskContainer />
+                path === '/' && <DueTodayTaskContainer />
             }
             {
                 path === 'all-tasks' && <AllTaskContainer />
