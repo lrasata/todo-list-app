@@ -27,6 +27,12 @@ module.exports = {
             filter = {...filter, completed: false};
         }
 
+        // filter by text search
+        const search = req.query.search;
+        if (search && search !== '') {
+            filter = {...filter, $text: { $search: search }};
+        }
+
         try {
             const tasks = await Task.find(filter).sort({ taskDate: 1 });
             res.json(tasks);

@@ -6,24 +6,25 @@ import {dateIsInThePast, dateIsToday} from "../util/util.ts";
 import dayjs from "dayjs";
 
 const initialAllTasksState = {
-    allTasks: [],
+    filteredTasks: [],
     dueTodayTasks: [],
     overdueTasks: [],
     isLoading: false,
     error: null,
 };
 
-export const fetchAllTasks = createAsyncThunk(
-    'tasks/fetchAllTasks',
-    async ( _, { rejectWithValue }) => {
+export const fetchFilteredTasks = createAsyncThunk(
+    'tasks/fetchFilteredTasks',
+    async ( arg: { search?: string }, { rejectWithValue }) => {
+        const url = arg && arg.search !== '' ? `${API_TASKS_ENDPOINT}?search=${arg.search}` : API_TASKS_ENDPOINT
         try {
-            const response = await axios.get<ITask[]>(API_TASKS_ENDPOINT, {withCredentials: true});
+            const response = await axios.get<ITask[]>(url, {withCredentials: true});
             return {
                 tasks: response.data
             }
         } catch (error) {
-            console.error("Error fetching all tasks:", error);
-            return rejectWithValue('Oops unable to fetch all tasks from API');
+            console.error("Error fetching filtered tasks:", error);
+            return rejectWithValue('Oops unable to fetch filtered tasks from API');
         }
     }
 );
@@ -120,15 +121,15 @@ const tasksSlice = createSlice({
     initialState: initialAllTasksState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchAllTasks.pending, (state) => {
+        builder.addCase(fetchFilteredTasks.pending, (state) => {
             state.isLoading = true
         })
-        builder.addCase(fetchAllTasks.fulfilled, (state, action) => {
+        builder.addCase(fetchFilteredTasks.fulfilled, (state, action) => {
             state.isLoading = false
             // @ts-ignore
-            state.allTasks = action.payload.tasks;
+            state.filteredTasks = action.payload.tasks;
         })
-        builder.addCase(fetchAllTasks.rejected, (state, action) => {
+        builder.addCase(fetchFilteredTasks.rejected, (state, action) => {
             state.isLoading = false
             // @ts-ignore
             state.error = action.error.message
@@ -154,7 +155,7 @@ const tasksSlice = createSlice({
             // @ts-ignore
             state.dueTodayTasks = dateIsToday(dayjs(action.payload.task.taskDate)) ? [action.payload.task, ...state.dueTodayTasks] : [...state.dueTodayTasks];
             // @ts-ignore
-            state.allTasks = [action.payload.task, ...state.allTasks];
+            state.filteredTasks = [action.payload.task, ...state.filteredTasks];
             // @ts-ignore
             state.overdueTasks = dateIsInThePast(dayjs(action.payload.task.taskDate)) ? [action.payload.task, ...state.overdueTasks] : [...state.overdueTasks];
         })
@@ -164,7 +165,7 @@ const tasksSlice = createSlice({
                 task._id === action.payload.task._id ? { ...task, ...action.payload.task } : task
             )
             // @ts-ignore
-            state.allTasks = state.allTasks.map((task: ITask) =>
+            state.filteredTasks = state.filteredTasks.map((task: ITask) =>
                 task._id === action.payload.task._id ? { ...task, ...action.payload.task } : task
             )
             // @ts-ignore
@@ -174,7 +175,7 @@ const tasksSlice = createSlice({
         })
         builder.addCase(deleteTask.fulfilled, (state, action) => {
             state.dueTodayTasks = state.dueTodayTasks.filter((t: ITask) => t._id !== action.payload.id);
-            state.allTasks = state.allTasks.filter((t: ITask) => t._id !== action.payload.id);
+            state.filteredTasks = state.filteredTasks.filter((t: ITask) => t._id !== action.payload.id);
             state.overdueTasks = state.overdueTasks.filter((t: ITask) => t._id !== action.payload.id);
         })
 

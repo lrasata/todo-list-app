@@ -1,13 +1,22 @@
 import TodoListContainer from '../containers/TodoListContainer.tsx';
-import {useSelector} from "react-redux";
 import Spinner from "../components/Spinner.tsx";
 import Typography from "@mui/material/Typography";
+import {useEffect} from "react";
+import {fetchOverdueTasks} from "../redux-store/tasks-slice.ts";
+import {useDispatch, useSelector} from "react-redux";
 
 const OverdueTaskContainer = () => {
+    const dispatch = useDispatch();
+
     // @ts-ignore
     const overdueTasksSelector = useSelector(state => state.tasks.overdueTasks);
     // @ts-ignore
     const isLoading = useSelector((state) => state.tasks.isLoading);
+
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchOverdueTasks());
+    }, []);
 
 
     return (

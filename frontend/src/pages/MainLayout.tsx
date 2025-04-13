@@ -3,9 +3,6 @@ import {Container, createTheme, ThemeProvider} from "@mui/material";
 import {CookiesProvider} from "react-cookie";
 import MainNavigation from "../components/MainNavigation.tsx";
 import LogOutButtonContainer from "../containers/LogOutButtonContainer.tsx";
-import {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {fetchAllTasks, fetchDueTodayTasks, fetchOverdueTasks} from "../redux-store/tasks-slice.ts";
 
 const theme = createTheme({
     typography: {
@@ -26,16 +23,6 @@ const theme = createTheme({
 
 
 const MainLayout = () => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        // @ts-ignore
-        dispatch(fetchDueTodayTasks());
-        // @ts-ignore
-        dispatch(fetchAllTasks());
-        // @ts-ignore
-        dispatch(fetchOverdueTasks());
-    }, []);
 
     return (
         <ThemeProvider theme={theme}>
