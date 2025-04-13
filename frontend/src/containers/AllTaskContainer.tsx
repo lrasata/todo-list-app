@@ -46,8 +46,10 @@ const AllTaskContainer = () => {
 
         if (inputSearch !== "") {
             newQueryParameters.set(SEARCH_QUERY_PARAMETER,  inputSearch);
-            setSearchParams(newQueryParameters);
+        } else {
+            newQueryParameters.delete(SEARCH_QUERY_PARAMETER);
         }
+        setSearchParams(newQueryParameters);
     }, [inputSearch]);
 
     useEffect(() => {
