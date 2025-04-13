@@ -1,6 +1,7 @@
 import TodoListContainer from '../containers/TodoListContainer.tsx';
 import {useSelector} from "react-redux";
 import Spinner from "../components/Spinner.tsx";
+import Typography from "@mui/material/Typography";
 
 const OverdueTaskContainer = () => {
     // @ts-ignore
@@ -11,6 +12,7 @@ const OverdueTaskContainer = () => {
 
     return (
         <>
+            <Typography variant="h5" component="h2" gutterBottom my={2}>Quick reminder — these tasks are waiting for you!</Typography>
             {
                 isLoading ? <Spinner/> : (<TodoListContainer tasks={overdueTasksSelector} displayDate={true}/>)
             }

@@ -17,7 +17,7 @@ const MainNavigation = () => {
                 setValue(2);
             }
         }
-    }, [])
+    }, [pathname])
 
     const handleChange = (_: SyntheticEvent, newValue: number) => {
         setValue(newValue);

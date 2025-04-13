@@ -3,9 +3,10 @@ const {getDateTomorrow} = require("../util/dates");
 
 module.exports = {
     getAllTasks: async (req, res) => {
-        const dueDate = req.query.dueDate;
         let filter = { 'user.userId': req.user._id };  // find only the tasks of currently authenticated user
 
+        // filter on taskDate dueDate=past or dueDate=today
+        const dueDate = req.query.dueDate;
         if (dueDate === 'today') {
             const currentDate = new Date(new Date().setHours(0,0,0,0)); // today's date at midnight
             const dateTomorrow = getDateTomorrow();
@@ -17,8 +18,17 @@ module.exports = {
             filter = {...filter, taskDate:{"$lt": currentDate}};
         }
 
+        // filter on completed tasks : completed=true or completed=false
+        const completed = req.query.completed;
+        if (completed === 'true') {
+            filter = {...filter, completed: true};
+        }
+        if (completed === 'false') {
+            filter = {...filter, completed: false};
+        }
+
         try {
-            const tasks = await Task.find(filter);
+            const tasks = await Task.find(filter).sort({ taskDate: 1 });
             res.json(tasks);
         } catch (err) {
             res.status(500).json({ error: err.message });

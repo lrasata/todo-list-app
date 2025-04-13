@@ -46,12 +46,16 @@ const DueTodayTaskContainer = () => {
     return (
         <>
             <Brand height={200}/>
-            <Typography variant="h5" component="h2" gutterBottom my={2}>Your planned tasks for today</Typography>
             <AlertOverdueTasksContainer />
+            {
+                dueTodayTasksSelector.length > 0 && <Typography variant="h5" component="h2" gutterBottom my={2}>Your planned tasks for today</Typography>
+            }
+            {
+                dueTodayTasksSelector.length === 0 && <Typography variant="h5" component="h2" gutterBottom my={2}>You don't have any scheduled tasks for today</Typography>
+            }
             {
                 isLoading ? <Spinner/> : <TodoListContainer tasks={dueTodayTasksSelector} displayDate={false} />
             }
-
             <Accordion sx={{my: 3}}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}

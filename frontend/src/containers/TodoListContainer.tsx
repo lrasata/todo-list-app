@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import {Box, Card} from "@mui/material";
+import {Alert, Box, Card} from "@mui/material";
 import {ITask} from "../types/types.ts";
 import dayjs, {Dayjs} from 'dayjs';
 import {deleteTask, updateTask} from "../redux-store/tasks-slice.ts";
 import {useDispatch} from "react-redux";
 import TaskCardContentEdit from "../components/TaskCardContentEdit.tsx";
 import TaskCardContent from "../components/TaskCardContent.tsx";
+import Typography from "@mui/material/Typography";
 
 
 interface ITodoList {
@@ -51,6 +52,9 @@ const TodoListContainer = ({
 
     return (
         <Box my={1}>
+            {
+                tasks.length === 0 && <Alert severity="info"><Typography>No task to display</Typography></Alert>
+            }
             {tasks.map((task) => {
                 return <Card key={task._id} sx={{my: 2, padding: 1}}>
                     {editingTaskId === task._id ? (
