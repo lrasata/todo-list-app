@@ -1,4 +1,4 @@
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { DemoContainer, DemoItem  } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -15,8 +15,17 @@ const BasicDatePicker = ({ value, onChange }: Props ) => {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']}>
-                <DatePicker format="DD/MM/YYYY" value={value} label="Task date" sx={{ maxWidth: isMobile ? "100%": "20px"}} onChange={onChange} />
+            <DemoContainer  components={['DatePicker']} sx={{ padding: 0 }}>
+                <DemoItem label="Task date">
+                    <DatePicker
+                        format="DD/MM/YYYY"
+                        value={value}
+                        sx={{ maxWidth: isMobile ? "100%": "20px", backgroundColor: "white"}}
+                        onChange={onChange}
+                        slotProps={{ field: { clearable: true } }}
+                    />
+                </DemoItem>
+
             </DemoContainer>
         </LocalizationProvider>
     );

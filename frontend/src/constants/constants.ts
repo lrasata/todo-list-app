@@ -6,4 +6,5 @@ export const API_LOGIN_ENDPOINT= `${import.meta.env.VITE_BACKEND_API_URL}/login`
 export const API_TASKS_DUE_TODAY= `${API_TASKS_ENDPOINT}?dueDate=today`;
 export const API_TASKS_OVERDUE= `${API_TASKS_ENDPOINT}?dueDate=past&completed=false`;
 
-export const SEARCH_QUERY_PARAMETER = 'search'
+export const SEARCH_QUERY_PARAMETER = 'search';
+export const DATE_QUERY_PARAMETER = 'filteredDate';

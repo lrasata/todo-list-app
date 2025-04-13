@@ -3,7 +3,8 @@ import {API_TASKS_DUE_TODAY, API_TASKS_ENDPOINT, API_TASKS_OVERDUE} from "../con
 import axios from "axios";
 import {ITask} from "../types/types.ts";
 import {dateIsInThePast, dateIsToday} from "../util/util.ts";
-import dayjs from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
+import qs from 'qs';
 
 const initialAllTasksState = {
     filteredTasks: [],
@@ -15,8 +16,12 @@ const initialAllTasksState = {
 
 export const fetchFilteredTasks = createAsyncThunk(
     'tasks/fetchFilteredTasks',
-    async ( arg: { search?: string }, { rejectWithValue }) => {
-        const url = arg && arg.search !== '' ? `${API_TASKS_ENDPOINT}?search=${arg.search}` : API_TASKS_ENDPOINT
+    async ( arg: { search?: string, date?: Dayjs }, { rejectWithValue }) => {
+        let url = API_TASKS_ENDPOINT;
+        if (arg) {
+            const queryString = qs.stringify(arg);
+            url = `${url}?${queryString}`;
+        }
         try {
             const response = await axios.get<ITask[]>(url, {withCredentials: true});
             return {

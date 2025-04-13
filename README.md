@@ -24,7 +24,10 @@ The purpose of this project is to serve as a training to get familiar with those
 - [x] ~~Fix issue on MainNavigation when reloading a different page than the homepage~~
 - [x] ~~create a 3rd for viewing all tasks~~
 - [ ] User can create a category and assign it to its tasks
-- [ ] User is able to filter tasks on the page for viewing all tasks page with search text, filter per category or date.
+- [x] ~~User is able to filter tasks on the page for viewing all tasks page with search text~~
+- [ ] User is able to filter per category
+- [x] ~~User is able to filter per date~~
+- [ ] Refactor filter management to be more robust and easily extendable + improve performance on useless calls
 - [ ] Fix issue toastify notification appears twice
 
 ## Backend
