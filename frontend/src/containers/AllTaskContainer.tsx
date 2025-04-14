@@ -17,6 +17,7 @@ interface IFilter {
     search: string;
     date: Dayjs | null;
 }
+
 const AllTaskContainer = () => {
     const dispatch = useDispatch();
 
@@ -25,21 +26,24 @@ const AllTaskContainer = () => {
     // @ts-ignore
     const dateSelector = useSelector(state => state.filter.date);
 
-    const [uiFilter, setUiFilter] = useState<IFilter>({ search: searchTextSelector, date: dateSelector });
+    const [uiFilter, setUiFilter] = useState<IFilter>({
+        search: searchTextSelector,
+        date: dateSelector
+    });
 
     // @ts-ignore
     const isLoading = useSelector((state) => state.tasks.isLoading);
     // @ts-ignore
     const filteredTasksSelector: ITask[] = useSelector(state => state.tasks.filteredTasks);
-    const [ resultMessage, setResultMessage ] = useState<string>("");
+    const [resultMessage, setResultMessage] = useState<string>("");
 
-    const { getQueryParamByKey, setQueryParam,removeQueryParamByKey } = useQueryParams();
+    const {getQueryParamByKey, setQueryParam, removeQueryParamByKey} = useQueryParams();
 
     const handleInputSearch = (inputSearch: string) => {
-        setUiFilter( (prevState) => ({...prevState, search: inputSearch}));
-        dispatch(filterActions.updateSearchText({ search: inputSearch }));
+        setUiFilter((prevState) => ({...prevState, search: inputSearch}));
+        dispatch(filterActions.updateSearchText({search: inputSearch}));
         // @ts-ignore
-        dispatch(fetchFilteredTasks({ search: inputSearch, ...uiFilter.date && {date: dayjs(uiFilter.date).toISOString() }}));
+        dispatch(fetchFilteredTasks({search: inputSearch, ...uiFilter.date && {date: dayjs(uiFilter.date).toISOString()}}));
         if (inputSearch !== "") {
             setQueryParam(SEARCH_QUERY_PARAMETER, inputSearch);
         } else {
@@ -50,19 +54,19 @@ const AllTaskContainer = () => {
     useEffect(() => {
         const searchQueryParam = getQueryParamByKey(SEARCH_QUERY_PARAMETER);
         if (searchQueryParam) {
-            dispatch(filterActions.updateSearchText({ search: searchQueryParam }));
-            setUiFilter( (prevState) => ({...prevState, search: searchQueryParam}));
+            dispatch(filterActions.updateSearchText({search: searchQueryParam}));
+            setUiFilter((prevState) => ({...prevState, search: searchQueryParam}));
         }
 
         const dateQueryParam = getQueryParamByKey(DATE_QUERY_PARAMETER);
         if (dateQueryParam) {
-            dispatch(filterActions.updateDate({ date: dateQueryParam }));
-            setUiFilter( (prevState) => ({...prevState, date: dayjs(dateQueryParam)}));
+            dispatch(filterActions.updateDate({date: dateQueryParam}));
+            setUiFilter((prevState) => ({...prevState, date: dayjs(dateQueryParam)}));
         }
 
         if (searchQueryParam || dateQueryParam) {
             // @ts-ignore
-            dispatch(fetchFilteredTasks({ search: searchQueryParam, date: dateQueryParam }));
+            dispatch(fetchFilteredTasks({search: searchQueryParam, date: dateQueryParam}));
         }
     }, []);
 
@@ -89,14 +93,14 @@ const AllTaskContainer = () => {
 
     const onDateChange = (date: Dayjs | null) => {
         if (date) {
-            dispatch(filterActions.updateDate({ date: date.toISOString() }));
+            dispatch(filterActions.updateDate({date: date.toISOString()}));
             // @ts-ignore
-            dispatch(fetchFilteredTasks({ search: uiFilter.search, date: date.toISOString() }));
+            dispatch(fetchFilteredTasks({search: uiFilter.search, date: date.toISOString()}));
             setQueryParam(DATE_QUERY_PARAMETER, date.toISOString());
         } else {
             dispatch(filterActions.removeDate());
             // @ts-ignore
-            dispatch(fetchFilteredTasks({ search: uiFilter.search, date: null }));
+            dispatch(fetchFilteredTasks({search: uiFilter.search, date: null}));
             removeQueryParamByKey(DATE_QUERY_PARAMETER);
         }
     }
@@ -104,8 +108,8 @@ const AllTaskContainer = () => {
     return (
         <>
             <Stack my={3} direction="column" gap={2}>
-                <SearchBar inputSearchText={uiFilter.search} handleSearch={handleInputSearch} />
-                <BasicDatePicker value={dayjs(dateSelector) ?? ""} onChange={(date) => onDateChange(date)} />
+                <SearchBar inputSearchText={uiFilter.search} handleSearch={handleInputSearch}/>
+                <BasicDatePicker value={dayjs(dateSelector) ?? ""} onChange={(date) => onDateChange(date)}/>
             </Stack>
             {
                 isLoading ? <Spinner/> : (
@@ -113,7 +117,7 @@ const AllTaskContainer = () => {
                         <Typography variant="subtitle2" color="textSecondary">{resultMessage}</Typography>
                         <TodoListContainer tasks={filteredTasksSelector} displayDate={true}/>
                     </>
-                    )
+                )
             }
         </>
 

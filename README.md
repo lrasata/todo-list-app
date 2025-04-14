@@ -16,18 +16,9 @@ The purpose of this project is to serve as a training to get familiar with those
 
 
 ### Ongoing improvements
-- [x] ~~Add a date of completion to Task~~
-- [x] ~~Highlight when a Task is overdue~~
-- [x] ~~Improve the Task view to show only the task for today on the landing page + alert if any overdue tasks~~
-- [x] ~~Optimise by using Redux to avoid props drilling and avoid API requests when switching from one page to another~~
-- [x] ~~create a 2nd page for overdue tasks~~
-- [x] ~~Fix issue on MainNavigation when reloading a different page than the homepage~~
-- [x] ~~create a 3rd for viewing all tasks~~
 - [ ] User can create a category and assign it to its tasks
-- [x] ~~User is able to filter tasks on the page for viewing all tasks page with search text~~
 - [ ] User is able to filter per category
-- [x] ~~User is able to filter per date~~
-- [ ] Refactor filter management to be more robust and easily extendable + improve performance on useless calls
+- [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
 - [ ] Fix issue toastify notification appears twice
 
 ## Backend
