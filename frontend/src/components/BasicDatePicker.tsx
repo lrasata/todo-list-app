@@ -6,7 +6,7 @@ import {useMediaQuery, useTheme} from "@mui/material";
 import {Dayjs} from "dayjs";
 
 interface Props {
-    value?: Dayjs;
+    value?: Dayjs | null | undefined;
     onChange: (date: Dayjs | null ) => void;
 }
 const BasicDatePicker = ({ value, onChange }: Props ) => {
@@ -19,10 +19,10 @@ const BasicDatePicker = ({ value, onChange }: Props ) => {
                 <DemoItem label="Task date">
                     <DatePicker
                         format="DD/MM/YYYY"
-                        value={value}
                         sx={{ maxWidth: isMobile ? "100%": "20px", backgroundColor: "white"}}
                         onChange={onChange}
                         slotProps={{ field: { clearable: true } }}
+                        {...value && {value}}
                     />
                 </DemoItem>
 

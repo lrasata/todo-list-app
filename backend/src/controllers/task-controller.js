@@ -33,12 +33,12 @@ module.exports = {
             filter = {...filter, $text: { $search: search }};
         }
 
-        // filter by filterDate
-        const filterDate = req.query.filterDate;
-        if (filterDate) {
-            const dateAtMidnight = new Date(new Date(filterDate).setHours(0,0,0,0));
+        // filter by date
+        const date = req.query.date;
+        if (date) {
+            const dateAtMidnight = new Date(new Date(date).setHours(0,0,0,0));
 
-            const dateDayAfter = new Date(filterDate);
+            const dateDayAfter = new Date(date);
             dateDayAfter.setDate(dateDayAfter.getDate() + 1);
             dateDayAfter.setHours(0,0,0,0);
 

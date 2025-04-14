@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialFilterState = {
-    searchText: '',
+    search: '',
     date: null
 }
 
@@ -10,7 +10,7 @@ const filterSlice = createSlice({
     initialState: initialFilterState,
     reducers: {
         updateSearchText(state, action) {
-            state.searchText = action.payload.searchText;
+            state.search = action.payload.search;
         },
         updateDate(state, action) {
             state.date = action.payload.date;
