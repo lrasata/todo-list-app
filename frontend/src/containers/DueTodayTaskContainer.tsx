@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import TodoListContainer from '../containers/TodoListContainer.tsx';
 import {
     Accordion,
@@ -20,7 +20,6 @@ import AlertOverdueTasksContainer from "./AlertOverdueTasksContainer.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../components/Spinner.tsx";
 import {createTask} from "../redux-store/tasks-slice.ts";
-import {fetchDueTodayTasks} from "../redux-store/tasks-slice.ts";
 
 
 const DueTodayTaskContainer = () => {
@@ -43,11 +42,6 @@ const DueTodayTaskContainer = () => {
         dispatch(createTask({ task: currentTask}));
         setCurrentTask(initialValue);
     };
-
-    useEffect(() => {
-        // @ts-ignore
-        dispatch(fetchDueTodayTasks());
-    }, []);
 
     return (
         <>

@@ -55,13 +55,15 @@ const TodoListContainer = ({
             {
                 tasks.length === 0 && <Alert severity="info"><Typography>No task to display</Typography></Alert>
             }
-            {tasks.map((task) => {
-                return <Card key={task._id} sx={{my: 2, padding: 1}}>
+            {tasks.map((task, index) => {
+                return <Card key={`${task._id}-${index}`} sx={{my: 2, padding: 1}}>
                     {editingTaskId === task._id ? (
                         <TaskCardContentEdit task={task} editingTitle={editingTitle} editingTaskDate={editingTaskDate}
                                              updateTask={handleUpdateTask} setEditingTaskId={setEditingTaskId}
                                              handleTitleEditChange={handleEditTitleChange}
-                                             handleTaskDateEditChange={handleTaskDateEditChange}/>
+                                             handleTaskDateEditChange={handleTaskDateEditChange}
+                                             key={`${task._id}-task-edit`}
+                        />
 
                     ) : (<TaskCardContent task={task}
                                           updateTask={handleUpdateTask}
@@ -69,6 +71,7 @@ const TodoListContainer = ({
                                           deleteTask={handleDeleteTask}
                                           setEditingTitle={setEditingTitle} setEditingTaskDate={setEditingTaskDate}
                                           displayDate={displayDate}
+                                          key={`${task._id}-task-card-content`}
                         />
                     )}
                 </Card>

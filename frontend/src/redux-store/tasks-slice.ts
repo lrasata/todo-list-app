@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API_TASKS_DUE_TODAY, API_TASKS_ENDPOINT, API_TASKS_OVERDUE} from "../constants/constants.ts";
 import axios from "axios";
 import {ITask} from "../types/types.ts";
-import {dateIsInThePast, dateIsToday} from "../util/util.ts";
+import {dateIsInThePast, dateIsToday, findAndUpdateTask, removeIfExistTask} from "../util/util.ts";
 import dayjs, {Dayjs} from "dayjs";
 import qs from 'qs';
 
@@ -74,7 +74,7 @@ export const deleteTask = createAsyncThunk(
         try {
             await axios.delete(`${API_TASKS_ENDPOINT}/${arg.id}`, {withCredentials: true});
             return {
-                id: arg.id
+                _id: arg.id
             }
         } catch (error) {
             console.error("Error deleting task:", error);
@@ -165,23 +165,51 @@ const tasksSlice = createSlice({
             state.overdueTasks = dateIsInThePast(dayjs(action.payload.task.taskDate)) ? [action.payload.task, ...state.overdueTasks] : [...state.overdueTasks];
         })
         builder.addCase(updateTask.fulfilled, (state, action) => {
+            const updatedTask = action.payload.task;
             // @ts-ignore
-            state.dueTodayTasks = state.dueTodayTasks.map((task: ITask) =>
-                task._id === action.payload.task._id ? { ...task, ...action.payload.task } : task
-            )
-            // @ts-ignore
-            state.filteredTasks = state.filteredTasks.map((task: ITask) =>
-                task._id === action.payload.task._id ? { ...task, ...action.payload.task } : task
-            )
-            // @ts-ignore
-            state.overdueTasks = state.overdueTasks.map((task: ITask) =>
-                task._id === action.payload.task._id ? { ...task, ...action.payload.task } : task
-            )
+            state.filteredTasks = findAndUpdateTask(updatedTask, [...state.filteredTasks]);
+
+            if (dateIsToday(dayjs(updatedTask.taskDate))) {
+                // when date has changed to be today
+                // @ts-ignore
+                state.overdueTasks = removeIfExistTask(updatedTask, state.overdueTasks);
+
+                const index = state.dueTodayTasks.findIndex( (element: ITask) => element._id === updatedTask._id)
+                if (index >= 0) {
+                    // @ts-ignore
+                    state.dueTodayTasks[index] = {...updatedTask}
+                } else {
+                    // @ts-ignore
+                    state.dueTodayTasks = [updatedTask, ...state.dueTodayTasks]
+                }
+            }
+
+            if (dateIsInThePast(dayjs(action.payload.task.taskDate))) {
+                // when date has changed to be in the past
+                // @ts-ignore
+                state.dueTodayTasks = removeIfExistTask(updatedTask, state.dueTodayTasks);
+
+                const index = state.overdueTasks.findIndex( (element: ITask) => element._id === updatedTask._id)
+                if (index >= 0) {
+                    if (updatedTask.completed) {
+                        state.overdueTasks.splice(index, 1); // overdueTasks only saves the uncompleted tasks
+                    } else {
+                        // @ts-ignore
+                        state.overdueTasks[index] = updatedTask;
+                    }
+                } else {
+                    if (!updatedTask.completed) {
+                        // @ts-ignore
+                        state.overdueTasks = [updatedTask, ...state.overdueTasks]
+                    }
+                }
+            }
+
         })
         builder.addCase(deleteTask.fulfilled, (state, action) => {
-            state.dueTodayTasks = state.dueTodayTasks.filter((t: ITask) => t._id !== action.payload.id);
-            state.filteredTasks = state.filteredTasks.filter((t: ITask) => t._id !== action.payload.id);
-            state.overdueTasks = state.overdueTasks.filter((t: ITask) => t._id !== action.payload.id);
+            state.dueTodayTasks = state.dueTodayTasks.filter((t: ITask) => t._id !== action.payload._id);
+            state.filteredTasks = state.filteredTasks.filter((t: ITask) => t._id !== action.payload._id);
+            state.overdueTasks = state.overdueTasks.filter((t: ITask) => t._id !== action.payload._id);
         })
 
     },
