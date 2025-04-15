@@ -38,8 +38,8 @@ const DueTodayTaskContainer = () => {
     const categoriesSelector = useSelector( (state) => state.categories.categories);
     const [categories, setCategories] = useState<ICategory[]>(categoriesSelector || []);
 
-    const initialValue = {title: "", completed: false, taskDate: null, categoryId: undefined}
-    const [currentTask, setCurrentTask] = useState<Pick<ITask, "title" | "completed" | "taskDate" | "categoryId">>(initialValue);
+    const initialValue = {title: "", completed: false, taskDate: null, category: undefined}
+    const [currentTask, setCurrentTask] = useState<Pick<ITask, "title" | "completed" | "taskDate" | "category">>(initialValue);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -106,11 +106,11 @@ const DueTodayTaskContainer = () => {
                         <BasicDatePicker value={dayjs(currentTask.taskDate) ?? ""} onChange={(date) => setCurrentTask(
                             (prevState) => ({...prevState, taskDate: dayjs(date)})
                         )}/>
-                        <SelectOrCreateCategory value={currentTask.categoryId || ""}
+                        <SelectOrCreateCategory value={currentTask.category?.categoryId || ""}
                                                 categories={categories}
                                                 onCreateNewTask={handleOpenDialog}
                                                 onChange={(e) => setCurrentTask(
-                                                    (prevState) => ({...prevState, categoryId: e.target.value})
+                                                    (prevState) => ({...prevState, category: {categoryId: e.target.value}})
                                                 )}
                         />
                         <Button variant="contained" onClick={handleAddTask} aria-label="Add task"

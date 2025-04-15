@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Alert, Box, Card} from "@mui/material";
+import {Alert, Box, Card, useTheme} from "@mui/material";
 import {ITask} from "../types/types.ts";
 import dayjs, {Dayjs} from 'dayjs';
 import {deleteTask, updateTask} from "../redux-store/tasks-slice.ts";
@@ -20,6 +20,7 @@ const TodoListContainer = ({
                       displayDate = true,
                   }: ITodoList) => {
     const dispatch = useDispatch();
+    const theme = useTheme();
 
     const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
     const [editingTitle, setEditingTitle] = useState<string>("");
@@ -56,7 +57,7 @@ const TodoListContainer = ({
                 tasks.length === 0 && <Alert severity="info"><Typography>No task to display</Typography></Alert>
             }
             {tasks.map((task, index) => {
-                return <Card key={`${task._id}-${index}`} sx={{my: 2, padding: 1}}>
+                return <Card key={`${task._id}-${index}`} sx={{ my: 2, padding: 1, backgroundColor: task.category?.colour || theme.palette.background.paper}}>
                     {editingTaskId === task._id ? (
                         <TaskCardContentEdit task={task} editingTitle={editingTitle} editingTaskDate={editingTaskDate}
                                              updateTask={handleUpdateTask} setEditingTaskId={setEditingTaskId}

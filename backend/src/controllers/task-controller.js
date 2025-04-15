@@ -55,15 +55,15 @@ module.exports = {
         }
     },
     createTask: async (req, res) => {
-        const { title, taskDate, categoryId } = req.body;
+        const { title, taskDate, category } = req.body;
 
         if (!title) {
             return res.status(400).json({ error: "Task title is required" });
         }
 
-        let category = {};
-        if (categoryId || categoryId !== '') {
-            category = await Category.findById(categoryId)
+        let fetchedCategory = {};
+        if (category && category.categoryId !== '') {
+            fetchedCategory = await Category.findById(category.categoryId)
         }
 
         try {
@@ -75,8 +75,9 @@ module.exports = {
                     userId: req.user
                 },
                 category: {
-                    name: category.name,
-                    categoryId: category._id
+                    name: fetchedCategory.name,
+                    colour: fetchedCategory.colour,
+                    categoryId: fetchedCategory._id
                 }
             });
             await newTask.save();

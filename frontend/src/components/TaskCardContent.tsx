@@ -1,4 +1,4 @@
-import {Box, Checkbox, IconButton, Stack} from "@mui/material";
+import {Box, Checkbox, Chip, IconButton, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import dayjs, {Dayjs} from "dayjs";
 import EditIcon from "@mui/icons-material/Edit";
@@ -29,7 +29,10 @@ const TaskCardContent = ({
 
     return (
         <>
-            {task.taskDate && displayDate && <DateChip dateLabel={task.taskDate.toString()}/>}
+            <Stack direction="row" spacing={1}>
+                {task.taskDate && displayDate && <DateChip dateLabel={task.taskDate.toString()} />}
+                {task.category && task.category.name && <Chip label={task.category.name} variant="outlined"/>}
+            </Stack>
             <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" mt={1}>
                 <Box display="flex" flexDirection="row" alignItems="center">
                     <Checkbox {...label}

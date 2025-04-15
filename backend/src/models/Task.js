@@ -31,6 +31,10 @@ const TaskSchema = new mongoose.Schema({
             type: String,
             required: false
         },
+        colour: {
+            type: String,
+            required: false
+        },
         categoryId: {
             type: Schema.Types.ObjectId,
             required: false,

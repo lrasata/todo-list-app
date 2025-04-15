@@ -11,6 +11,10 @@ export interface ITask {
     title: string;
     completed: boolean;
     taskDate: Dayjs | string | null;
-    categoryId?: string;
+    category?: {
+        categoryId: string;
+        name?: string;
+        colour?: string;
+    }
 }
 
