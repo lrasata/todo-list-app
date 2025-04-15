@@ -18,7 +18,7 @@ module.exports = {
         try {
             const newCategory = new Category({
                 name,
-                categoryColour
+                colour: categoryColour
             });
             await newCategory.save();
             res.status(201).json(newCategory);

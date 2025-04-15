@@ -8,3 +8,5 @@ export const API_TASKS_OVERDUE= `${API_TASKS_ENDPOINT}?dueDate=past&completed=fa
 
 export const SEARCH_QUERY_PARAMETER = 'search';
 export const DATE_QUERY_PARAMETER = 'filteredDate';
+
+export const API_CATEGORIES_ENDPOINT= `${import.meta.env.VITE_BACKEND_API_URL}/api/categories`;

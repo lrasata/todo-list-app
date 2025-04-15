@@ -21,6 +21,8 @@ import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../components/Spinner.tsx";
 import {createTask} from "../redux-store/tasks-slice.ts";
 import SelectOrCreateCategory from "../components/SelectOrCreateCategory.tsx";
+import Dialog from "../components/Dialog.tsx";
+import CreateCategoryContainer from "./CreateCategoryContainer.tsx";
 
 
 const DueTodayTaskContainer = () => {
@@ -36,12 +38,22 @@ const DueTodayTaskContainer = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+    const [openDialog, setOpenDialog] = useState(false);
+
     const handleAddTask = async () => {
         if (!currentTask) return;
 
         // @ts-ignore
         dispatch(createTask({ task: currentTask}));
         setCurrentTask(initialValue);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
     };
 
     return (
@@ -80,12 +92,18 @@ const DueTodayTaskContainer = () => {
                         <BasicDatePicker onChange={(date) => setCurrentTask(
                             (prevState) => ({...prevState, taskDate: dayjs(date)})
                         )}/>
-                        <SelectOrCreateCategory />
+                        <SelectOrCreateCategory onCreateNewTask={handleOpenDialog}/>
                         <Button variant="contained" onClick={handleAddTask} aria-label="Add task"
                                 sx={{width: isMobile ? "inherit" : "max-content"}}>Add</Button>
                     </Stack>
                 </AccordionDetails>
             </Accordion>
+            <Dialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                title={"Create a new category"}
+                content={<CreateCategoryContainer closeDialog={handleCloseDialog}/>}
+            />
         </>
     );
 

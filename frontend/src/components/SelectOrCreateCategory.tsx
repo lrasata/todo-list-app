@@ -2,9 +2,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {Button} from "@mui/material";
+import {Button, useMediaQuery, useTheme} from "@mui/material";
 
-const SelectOrCreateCategory = () => {
+interface Props {
+    onCreateNewTask: () => void;
+}
+const SelectOrCreateCategory = ({ onCreateNewTask } : Props) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return <FormControl sx={{ display: "flex", flexDirection: "column", maxWidth: "max-content" }}>
         <InputLabel id="demo-simple-select-label">Select a category</InputLabel>
@@ -12,7 +17,8 @@ const SelectOrCreateCategory = () => {
             labelId="category-select-label"
             id="category-select"
             label="Select a category"
-            sx={{ minWidth: 300 }}
+            sx={{ minWidth: 300, mb: 2 }}
+            fullWidth={isMobile}
         >
             <MenuItem value="">
                 <em>None</em>
@@ -21,7 +27,7 @@ const SelectOrCreateCategory = () => {
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
         </Select>
-        <Button variant="text" >or create a new category</Button>
+        <Button variant="outlined" onClick={onCreateNewTask}>create a new category</Button>
     </FormControl>
 }
 

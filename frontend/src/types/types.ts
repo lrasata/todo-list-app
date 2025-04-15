@@ -6,3 +6,9 @@ export interface ITask {
     completed: boolean;
     taskDate: Dayjs | string | null;
 }
+
+export interface ICategory {
+    _id: string;
+    name: string;
+    colour: string;
+}
