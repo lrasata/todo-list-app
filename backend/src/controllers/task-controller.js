@@ -1,5 +1,6 @@
 const Task = require("../models/Task");
 const {getDateTomorrow} = require("../util/dates");
+const Category = require("../models/Category");
 
 module.exports = {
     getAllTasks: async (req, res) => {
@@ -54,10 +55,15 @@ module.exports = {
         }
     },
     createTask: async (req, res) => {
-        const { title, taskDate } = req.body;
+        const { title, taskDate, categoryId } = req.body;
 
         if (!title) {
             return res.status(400).json({ error: "Task title is required" });
+        }
+
+        let category = {};
+        if (categoryId || categoryId !== '') {
+            category = await Category.findById(categoryId)
         }
 
         try {
@@ -68,6 +74,10 @@ module.exports = {
                     username: req.user.username,
                     userId: req.user
                 },
+                category: {
+                    name: category.name,
+                    categoryId: category._id
+                }
             });
             await newTask.save();
             res.status(201).json(newTask);

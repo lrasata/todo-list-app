@@ -16,8 +16,8 @@ The purpose of this project is to serve as a training to get familiar with those
 
 
 ### Ongoing improvements
-- [x] User can create a category 
-- [ ] User can assign a category to a task - only the ones it created
+- [x] ~~User can create a category~~
+- [x] ~~User can assign a category to a task - only the ones it created~~
 - [ ] Category of task is displayed and highlighted with its colour
 - [ ] User can update a category of a task
 - [ ] User is able to filter per category

@@ -1,15 +1,18 @@
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {Button, useMediaQuery, useTheme} from "@mui/material";
 import {ICategory} from "../types/types.ts";
+import {ReactNode} from "react";
 
 interface Props {
     categories: ICategory[] ;
     onCreateNewTask: () => void;
+    onChange: (event: SelectChangeEvent<string>, child: ReactNode) => void
+    value?: string
 }
-const SelectOrCreateCategory = ({ categories = [], onCreateNewTask } : Props) => {
+const SelectOrCreateCategory = ({ value, categories = [], onCreateNewTask, onChange } : Props) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -22,6 +25,8 @@ const SelectOrCreateCategory = ({ categories = [], onCreateNewTask } : Props) =>
             sx={{ minWidth: 300, mb: 2 }}
             fullWidth={isMobile}
             defaultValue = ""
+            onChange={onChange}
+            value={value}
         >
             <MenuItem value="">
                 <em>None</em>

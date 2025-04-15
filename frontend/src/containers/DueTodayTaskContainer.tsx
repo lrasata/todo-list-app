@@ -38,8 +38,8 @@ const DueTodayTaskContainer = () => {
     const categoriesSelector = useSelector( (state) => state.categories.categories);
     const [categories, setCategories] = useState<ICategory[]>(categoriesSelector || []);
 
-    const initialValue = {title: "", completed: false, taskDate: null}
-    const [currentTask, setCurrentTask] = useState<Pick<ITask, "title" | "completed" | "taskDate">>(initialValue);
+    const initialValue = {title: "", completed: false, taskDate: null, categoryId: undefined}
+    const [currentTask, setCurrentTask] = useState<Pick<ITask, "title" | "completed" | "taskDate" | "categoryId">>(initialValue);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -103,10 +103,16 @@ const DueTodayTaskContainer = () => {
                             size="medium"
                             fullWidth
                         />
-                        <BasicDatePicker onChange={(date) => setCurrentTask(
+                        <BasicDatePicker value={dayjs(currentTask.taskDate) ?? ""} onChange={(date) => setCurrentTask(
                             (prevState) => ({...prevState, taskDate: dayjs(date)})
                         )}/>
-                        <SelectOrCreateCategory categories={categories} onCreateNewTask={handleOpenDialog}/>
+                        <SelectOrCreateCategory value={currentTask.categoryId || ""}
+                                                categories={categories}
+                                                onCreateNewTask={handleOpenDialog}
+                                                onChange={(e) => setCurrentTask(
+                                                    (prevState) => ({...prevState, categoryId: e.target.value})
+                                                )}
+                        />
                         <Button variant="contained" onClick={handleAddTask} aria-label="Add task"
                                 sx={{width: isMobile ? "inherit" : "max-content"}}>Add</Button>
                     </Stack>
