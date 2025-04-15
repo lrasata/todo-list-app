@@ -25,6 +25,17 @@ const TaskSchema = new mongoose.Schema({
             required: true,
             ref: 'User'
         }
+    },
+    category: {
+        name: {
+            type: String,
+            required: false
+        },
+        categoryId: {
+            type: Schema.Types.ObjectId,
+            required: false,
+            ref: 'Category'
+        }
     }
 });
 

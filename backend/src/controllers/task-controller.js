@@ -48,8 +48,9 @@ module.exports = {
         try {
             const tasks = await Task.find(filter).sort({ taskDate: 1 });
             res.json(tasks);
-        } catch (err) {
-            res.status(500).json({ error: err.message });
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).json({ error: error.message });
         }
     },
     createTask: async (req, res) => {
@@ -91,22 +92,24 @@ module.exports = {
             )
             res.json(updatedTask);
         } catch (error) {
-            res.status(500).json({ error: "Error updating task" });
+            console.error(error.message);
+            res.status(500).json({ error: error.message });
         }
     },
     deleteTask: async (req, res) => {
         try {
             const { id } = req.params;
-            const taskToUpdate = await Task.find({ 'user.userId': req.user._id, _id: id });
+            const taskToDelete = await Task.find({ 'user.userId': req.user._id, _id: id });
 
-            if (!taskToUpdate) {
+            if (!taskToDelete) {
                 res.status(404).json({ error: "Task of user not found" });
             }
 
             await Task.deleteOne( { _id: id });
             res.json({ message: "Task deleted" });
-        } catch (err) {
-            res.status(500).json({ error: err.message });
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).json({ error: error.message });
         }
     }
 }

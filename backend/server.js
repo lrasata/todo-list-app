@@ -44,6 +44,10 @@ const tasksRoutes = require("./src/routes/tasks");
 
 app.use("/api/tasks", tasksRoutes);
 
+const categoriesRoutes = require("./src/routes/categories");
+
+app.use("/api/categories", categoriesRoutes);
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

@@ -20,6 +20,7 @@ import AlertOverdueTasksContainer from "./AlertOverdueTasksContainer.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../components/Spinner.tsx";
 import {createTask} from "../redux-store/tasks-slice.ts";
+import SelectOrCreateCategory from "../components/SelectOrCreateCategory.tsx";
 
 
 const DueTodayTaskContainer = () => {
@@ -65,20 +66,21 @@ const DueTodayTaskContainer = () => {
                     <Typography variant="h6" component="span" color="primary">Create new task</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Stack spacing={1}>
+                    <Stack spacing={4}>
                         <TextField
                             value={currentTask.title}
                             onChange={(e) => setCurrentTask(
                                 (prevState) => ({...prevState, title: e.target.value})
                             )}
                             sx={{backgroundColor: 'white'}}
-                            placeholder="Enter task description"
+                            label="Enter task description"
                             size="medium"
                             fullWidth
                         />
                         <BasicDatePicker onChange={(date) => setCurrentTask(
                             (prevState) => ({...prevState, taskDate: dayjs(date)})
                         )}/>
+                        <SelectOrCreateCategory />
                         <Button variant="contained" onClick={handleAddTask} aria-label="Add task"
                                 sx={{width: isMobile ? "inherit" : "max-content"}}>Add</Button>
                     </Stack>
