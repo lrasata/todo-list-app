@@ -90,15 +90,33 @@ module.exports = {
     updateTask: async (req, res) => {
         try {
             const { id } = req.params;
+            const { title, taskDate, category } = req.body;
             const taskToUpdate = await Task.find({ 'user.userId': req.user._id, _id: id });
 
             if (!taskToUpdate) {
                 res.status(404).json({ error: "Task of user not found" });
             }
 
+            let fetchedCategory = {};
+            if (category && category.categoryId !== '') {
+                fetchedCategory = await Category.findById(category.categoryId)
+            }
+
+            let bodyToUpdate = {
+                title,
+                taskDate
+            }
+            if (fetchedCategory) {
+                bodyToUpdate = {...bodyToUpdate, category: {
+                        name: fetchedCategory.name,
+                        colour: fetchedCategory.colour,
+                        categoryId: fetchedCategory._id
+                    }};
+            }
+
             const updatedTask = await Task.findByIdAndUpdate(
                 id,
-                req.body,
+                bodyToUpdate,
                 { new: true } // Return the updated task
             )
             res.json(updatedTask);

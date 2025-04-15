@@ -21,9 +21,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../components/Spinner.tsx";
 import {createTask} from "../redux-store/tasks-slice.ts";
 import SelectOrCreateCategory from "../components/SelectOrCreateCategory.tsx";
-import Dialog from "../components/Dialog.tsx";
-import CreateCategoryContainer from "./CreateCategoryContainer.tsx";
-import {fetchCategories} from "../redux-store/categories-slice.ts";
+import {dialogActions} from "../redux-store/dialog-slice.ts";
 
 
 const DueTodayTaskContainer = () => {
@@ -43,7 +41,6 @@ const DueTodayTaskContainer = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-    const [openDialog, setOpenDialog] = useState(false);
 
     const handleAddTask = async () => {
         if (!currentTask) return;
@@ -53,22 +50,14 @@ const DueTodayTaskContainer = () => {
         setCurrentTask(initialValue);
     };
 
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
 
     const handleOpenDialog = () => {
-        setOpenDialog(true);
+        dispatch(dialogActions.open());
     };
 
     useEffect(() => {
         setCategories(categoriesSelector)
     }, [categoriesSelector]);
-
-    useEffect(() => {
-        // @ts-ignore
-        dispatch(fetchCategories());
-    }, []);
 
     return (
         <>
@@ -118,12 +107,6 @@ const DueTodayTaskContainer = () => {
                     </Stack>
                 </AccordionDetails>
             </Accordion>
-            <Dialog
-                open={openDialog}
-                onClose={handleCloseDialog}
-                title={"Create a new category"}
-                content={<CreateCategoryContainer closeDialog={handleCloseDialog}/>}
-            />
         </>
     );
 

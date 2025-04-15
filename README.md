@@ -19,7 +19,7 @@ The purpose of this project is to serve as a training to get familiar with those
 - [x] ~~User can create a category~~
 - [x] ~~User can assign a category to a task - only the ones it created~~
 - [x] ~~Category of task is displayed and highlighted with its colour~~
-- [ ] User can update a category of a task
+- [x] ~~User can update a category of a task~~
 - [ ] User should choose colour from a palette selection
 - [ ] User is able to filter per category
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls

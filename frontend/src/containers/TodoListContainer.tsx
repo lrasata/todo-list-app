@@ -3,10 +3,11 @@ import {Alert, Box, Card, useTheme} from "@mui/material";
 import {ITask} from "../types/types.ts";
 import dayjs, {Dayjs} from 'dayjs';
 import {deleteTask, updateTask} from "../redux-store/tasks-slice.ts";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import TaskCardContentEdit from "../components/TaskCardContentEdit.tsx";
 import TaskCardContent from "../components/TaskCardContent.tsx";
 import Typography from "@mui/material/Typography";
+import {dialogActions} from "../redux-store/dialog-slice.ts";
 
 
 interface ITodoList {
@@ -25,6 +26,11 @@ const TodoListContainer = ({
     const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
     const [editingTitle, setEditingTitle] = useState<string>("");
     const [editingTaskDate, setEditingTaskDate] = useState<Dayjs | null>(dayjs());
+    const [editingCategoryId, setEditingCategoryId] = useState<string | null>(null);
+
+    // @ts-ignore
+    const categoriesSelector = useSelector( (state) => state.categories.categories);
+
 
     const startEditing = (id: string) => {
         setEditingTaskId(id);
@@ -43,12 +49,20 @@ const TodoListContainer = ({
         dispatch(deleteTask({ id }));
     };
 
+    const handleOnCategoryChange = (e: { target: { value: React.SetStateAction<string | null>; }; }) => {
+        setEditingCategoryId(e.target.value);
+    }
+
     const handleUpdateTask = async (id: string, updatedTask: Partial<ITask>) => {
         // @ts-ignore
         dispatch(updateTask({id, updatedTask}));
         setEditingTaskId(null);
         setEditingTitle("");
         setEditingTaskDate(dayjs());
+    };
+
+    const handleOpenDialog = () => {
+        dispatch(dialogActions.open());
     };
 
     return (
@@ -59,11 +73,20 @@ const TodoListContainer = ({
             {tasks.map((task, index) => {
                 return <Card key={`${task._id}-${index}`} sx={{ my: 2, padding: 1, backgroundColor: task.category?.colour || theme.palette.background.paper}}>
                     {editingTaskId === task._id ? (
-                        <TaskCardContentEdit task={task} editingTitle={editingTitle} editingTaskDate={editingTaskDate}
-                                             updateTask={handleUpdateTask} setEditingTaskId={setEditingTaskId}
+                        <TaskCardContentEdit task={task}
+                                             editingTitle={editingTitle}
+                                             editingTaskDate={editingTaskDate}
+                                             updateTask={handleUpdateTask}
+                                             setEditingTaskId={setEditingTaskId}
                                              handleTitleEditChange={handleEditTitleChange}
                                              handleTaskDateEditChange={handleTaskDateEditChange}
                                              key={`${task._id}-task-edit`}
+                                             editingCategoryId={editingCategoryId}
+                                             categories={categoriesSelector}
+                                             handleOpenDialog={handleOpenDialog}
+                                             handleOnCategoryChange={handleOnCategoryChange}
+
+
                         />
 
                     ) : (<TaskCardContent task={task}
