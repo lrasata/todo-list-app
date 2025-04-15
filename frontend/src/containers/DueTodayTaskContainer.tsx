@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import TodoListContainer from '../containers/TodoListContainer.tsx';
 import {
     Accordion,
@@ -10,7 +10,7 @@ import {
     useMediaQuery,
     useTheme
 } from '@mui/material';
-import {ITask} from "../types/types.ts";
+import {ICategory, ITask} from "../types/types.ts";
 import Brand from "../components/Brand.tsx";
 import BasicDatePicker from "../components/BasicDatePicker.tsx";
 import Typography from "@mui/material/Typography";
@@ -23,6 +23,7 @@ import {createTask} from "../redux-store/tasks-slice.ts";
 import SelectOrCreateCategory from "../components/SelectOrCreateCategory.tsx";
 import Dialog from "../components/Dialog.tsx";
 import CreateCategoryContainer from "./CreateCategoryContainer.tsx";
+import {fetchCategories} from "../redux-store/categories-slice.ts";
 
 
 const DueTodayTaskContainer = () => {
@@ -32,6 +33,10 @@ const DueTodayTaskContainer = () => {
     const dueTodayTasksSelector = useSelector(state => state.tasks.dueTodayTasks);
     // @ts-ignore
     const isLoading = useSelector((state) => state.tasks.isLoading);
+
+    // @ts-ignore
+    const categoriesSelector = useSelector( (state) => state.categories.categories);
+    const [categories, setCategories] = useState<ICategory[]>(categoriesSelector || []);
 
     const initialValue = {title: "", completed: false, taskDate: null}
     const [currentTask, setCurrentTask] = useState<Pick<ITask, "title" | "completed" | "taskDate">>(initialValue);
@@ -55,6 +60,15 @@ const DueTodayTaskContainer = () => {
     const handleOpenDialog = () => {
         setOpenDialog(true);
     };
+
+    useEffect(() => {
+        setCategories(categoriesSelector)
+    }, [categoriesSelector]);
+
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchCategories());
+    }, []);
 
     return (
         <>
@@ -92,7 +106,7 @@ const DueTodayTaskContainer = () => {
                         <BasicDatePicker onChange={(date) => setCurrentTask(
                             (prevState) => ({...prevState, taskDate: dayjs(date)})
                         )}/>
-                        <SelectOrCreateCategory onCreateNewTask={handleOpenDialog}/>
+                        <SelectOrCreateCategory categories={categories} onCreateNewTask={handleOpenDialog}/>
                         <Button variant="contained" onClick={handleAddTask} aria-label="Add task"
                                 sx={{width: isMobile ? "inherit" : "max-content"}}>Add</Button>
                     </Stack>

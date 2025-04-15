@@ -18,7 +18,11 @@ module.exports = {
         try {
             const newCategory = new Category({
                 name,
-                colour: categoryColour
+                colour: categoryColour,
+                user: { // link currently authenticated user to the task
+                    username: req.user.username,
+                    userId: req.user
+                },
             });
             await newCategory.save();
             res.status(201).json(newCategory);
@@ -30,7 +34,7 @@ module.exports = {
     updateCategory: async (req, res) => {
         try {
             const { id } = req.params;
-            const categoryToUpdate = await Category.find({ _id: id });
+            const categoryToUpdate = await Category.find({ 'user.userId': req.user._id, _id: id });
 
             if (!categoryToUpdate) {
                 res.status(404).json({ error: "Category not found" });
@@ -50,7 +54,7 @@ module.exports = {
     deleteCategory: async (req, res) => {
         try {
             const { id } = req.params;
-            const categoryToDelete = await Category.find({ _id: id });
+            const categoryToDelete = await Category.find({ 'user.userId': req.user._id, _id: id });
 
             if (!categoryToDelete) {
                 res.status(404).json({ error: "Category not found" });
@@ -64,8 +68,10 @@ module.exports = {
         }
     },
     getCategories: async (req, res) => {
+        let filter = { 'user.userId': req.user._id };
+
         try {
-            const categories = await Category.find().sort({ name: 1 });
+            const categories = await Category.find(filter).sort({ name: 1 });
             res.json(categories);
         } catch (error) {
             console.error(error.message);

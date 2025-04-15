@@ -16,7 +16,10 @@ The purpose of this project is to serve as a training to get familiar with those
 
 
 ### Ongoing improvements
-- [ ] User can create a category and assign it to its tasks
+- [x] User can create a category 
+- [ ] User can assign a category to a task - only the ones it created
+- [ ] Category of task is displayed and highlighted with its colour
+- [ ] User can update a category of a task
 - [ ] User is able to filter per category
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
 - [ ] Fix issue toastify notification appears twice
