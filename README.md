@@ -21,10 +21,11 @@ The purpose of this project is to serve as a training to get familiar with those
 - [x] ~~Category of task is displayed and highlighted with its colour~~
 - [x] ~~User can update a category of a task~~
 - [x] ~~User should choose colour from a palette selection~~
-- [ ] User is able to filter per category
-- [ ] Category management + replace Navigation with AppBar to be able to add more menu item
+- [x] ~~User is able to filter per category - only a UI Filter (at least until category can be fully managed on the frontend)~~
+- [ ] Category management (when updating a category on DocumentDB the change should propagate) + replace Navigation with AppBar to be able to add more menu item
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
 - [ ] Fix issue toastify notification appears twice
+- [ ] Add unit test and e2e testing
 
 ## Backend
 

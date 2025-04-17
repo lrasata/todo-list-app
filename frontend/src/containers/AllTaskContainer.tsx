@@ -6,12 +6,13 @@ import {Stack} from "@mui/material";
 import {filterActions} from "../redux-store/filter-slice.ts";
 import {fetchFilteredTasks} from "../redux-store/tasks-slice.ts";
 import {DATE_QUERY_PARAMETER, SEARCH_QUERY_PARAMETER} from "../constants/constants.ts";
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import BasicDatePicker from "../components/BasicDatePicker.tsx";
 import dayjs, {Dayjs} from "dayjs";
-import {ITask} from "../types/types.ts";
+import {ICategory, ITask} from "../types/types.ts";
 import useQueryParams from '../hooks/useQueryParams';
+import CategoryFilterContainer from "./CategoryFilterContainer.tsx";
 
 interface IFilter {
     search: string;
@@ -25,31 +26,23 @@ const AllTaskContainer = () => {
     const searchTextSelector = useSelector(state => state.filter.search);
     // @ts-ignore
     const dateSelector = useSelector(state => state.filter.date);
+    // @ts-ignore
+    const categoriesSelector = useSelector(state => state.categories.categories);
 
     const [uiFilter, setUiFilter] = useState<IFilter>({
         search: searchTextSelector,
         date: dateSelector
     });
-
     // @ts-ignore
     const isLoading = useSelector((state) => state.tasks.isLoading);
     // @ts-ignore
     const filteredTasksSelector: ITask[] = useSelector(state => state.tasks.filteredTasks);
+    const [tasks, setTasks] = useState(filteredTasksSelector);
     const [resultMessage, setResultMessage] = useState<string>("");
 
     const {getQueryParamByKey, setQueryParam, removeQueryParamByKey} = useQueryParams();
 
-    const handleInputSearch = (inputSearch: string) => {
-        setUiFilter((prevState) => ({...prevState, search: inputSearch}));
-        dispatch(filterActions.updateSearchText({search: inputSearch}));
-        // @ts-ignore
-        dispatch(fetchFilteredTasks({search: inputSearch, ...uiFilter.date && {date: dayjs(uiFilter.date).toISOString()}}));
-        if (inputSearch !== "") {
-            setQueryParam(SEARCH_QUERY_PARAMETER, inputSearch);
-        } else {
-            removeQueryParamByKey(SEARCH_QUERY_PARAMETER);
-        }
-    }
+    const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<ICategory[]>([]);
 
     useEffect(() => {
         const searchQueryParam = getQueryParamByKey(SEARCH_QUERY_PARAMETER);
@@ -78,8 +71,32 @@ const AllTaskContainer = () => {
     }, [searchTextSelector]);
 
     useEffect(() => {
-        setResultMessage(`Showing ${filteredTasksSelector.length} results`)
+        if (tasks.length === 1){
+            setResultMessage(`Showing 1 result`)
+        } else {
+            setResultMessage(`Showing ${tasks.length} results`)
+        }
+
+    }, [tasks]);
+
+    useEffect(() => {
+        setTasks(filteredTasksSelector);
+        setSelectedCategoryFilter([]);
     }, [filteredTasksSelector]);
+
+    useEffect(() => {
+        if (selectedCategoryFilter.length !== 0) {
+            const filterIds = selectedCategoryFilter.map( category => category._id);
+            setTasks(filteredTasksSelector.filter((task) => {
+                if (task.category && task.category.categoryId) {
+                    return filterIds.includes(task.category?.categoryId);
+                }
+                return false;
+            }));
+        } else {
+            setTasks(filteredTasksSelector);
+        }
+    }, [selectedCategoryFilter]);
 
     useEffect(() => {
         // this is a workaround as BasicDatePicker is not triggering onDateChange()
@@ -90,6 +107,17 @@ const AllTaskContainer = () => {
         }
     }, [dateSelector]);
 
+    const handleInputSearch = (inputSearch: string) => {
+        setUiFilter((prevState) => ({...prevState, search: inputSearch}));
+        dispatch(filterActions.updateSearchText({search: inputSearch}));
+        // @ts-ignore
+        dispatch(fetchFilteredTasks({search: inputSearch, ...uiFilter.date && {date: dayjs(uiFilter.date).toISOString()}}));
+        if (inputSearch !== "") {
+            setQueryParam(SEARCH_QUERY_PARAMETER, inputSearch);
+        } else {
+            removeQueryParamByKey(SEARCH_QUERY_PARAMETER);
+        }
+    }
 
     const onDateChange = (date: Dayjs | null) => {
         if (date) {
@@ -105,17 +133,27 @@ const AllTaskContainer = () => {
         }
     }
 
+    const handleCategoryFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const index = categoriesSelector.findIndex((category: ICategory) => category.name === event.target.name)
+        if (event.target.checked) {
+            setSelectedCategoryFilter( prevState => [...prevState, categoriesSelector[index]]);
+        } else {
+            setSelectedCategoryFilter( prevState => prevState.splice(index, 0));
+        }
+    }
+
     return (
         <>
             <Stack my={3} direction="column" gap={2}>
                 <SearchBar inputSearchText={uiFilter.search} handleSearch={handleInputSearch}/>
                 <BasicDatePicker value={dayjs(dateSelector) ?? ""} onChange={(date) => onDateChange(date)}/>
+                <CategoryFilterContainer categories={categoriesSelector}  handleCategoryFilterChange={handleCategoryFilterChange}/>
             </Stack>
             {
                 isLoading ? <Spinner/> : (
                     <>
                         <Typography variant="subtitle2" color="textSecondary">{resultMessage}</Typography>
-                        <TodoListContainer tasks={filteredTasksSelector} displayDate={true}/>
+                        <TodoListContainer tasks={tasks} displayDate={true}/>
                     </>
                 )
             }
