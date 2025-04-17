@@ -10,3 +10,30 @@ export const SEARCH_QUERY_PARAMETER = 'search';
 export const DATE_QUERY_PARAMETER = 'filteredDate';
 
 export const API_CATEGORIES_ENDPOINT= `${import.meta.env.VITE_BACKEND_API_URL}/api/categories`;
+
+export const COLOUR_OPTIONS = [
+    {
+        name: "pink",
+        value: "#FFD1DC"
+    },
+    {
+        name: "blue",
+        value: "#AEC6CF"
+    },
+    {
+        name: "lavender",
+        value: "#E6E6FA"
+    },
+    {
+        name: "peach",
+        value: "#FFE5B4"
+    },
+    {
+        name: "yellow",
+        value: "#FFFFB3"
+    },
+    {
+        name: "green",
+        value: "#AAF0D1"
+    }
+]

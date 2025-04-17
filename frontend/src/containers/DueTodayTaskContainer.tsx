@@ -64,7 +64,7 @@ const DueTodayTaskContainer = () => {
             <Brand height={200}/>
             <AlertOverdueTasksContainer />
             {
-                dueTodayTasksSelector.length > 0 && <Typography variant="h5" component="h2" gutterBottom my={2}>Your planned tasks for today</Typography>
+                dueTodayTasksSelector.length > 0 && <Typography variant="h5" component="h2" gutterBottom my={2}>{`Your planned tasks for today : ${dayjs().format('DD/MM')}`}</Typography>
             }
             {
                 dueTodayTasksSelector.length === 0 && <Typography variant="h5" component="h2" gutterBottom my={2}>You don't have any scheduled tasks for today</Typography>
