@@ -8,20 +8,24 @@ import Dialog from "../components/Dialog.tsx";
 import CreateCategoryContainer from "../containers/CreateCategoryContainer.tsx";
 import {dialogActions} from "../redux-store/dialog-slice.ts";
 import {fetchCategories} from "../redux-store/categories-slice.ts";
+import {useCookies} from "react-cookie";
 
 const MainContent = () => {
     const dispatch = useDispatch();
     const dialogSelector = useSelector((state: { dialog: { isOpen: boolean; }; }) => state.dialog.isOpen);
     const [openDialog, setOpenDialog] = useState(dialogSelector);
+    const [cookies] = useCookies(['token']);
 
     useEffect(() => {
-        // @ts-ignore
-        dispatch(fetchDueTodayTasks());
-        // @ts-ignore
-        dispatch(fetchOverdueTasks());
-        // @ts-ignore
-        dispatch(fetchCategories());
-    }, []);
+        if (cookies.token) {
+            // @ts-ignore
+            dispatch(fetchDueTodayTasks());
+            // @ts-ignore
+            dispatch(fetchOverdueTasks());
+            // @ts-ignore
+            dispatch(fetchCategories());
+        }
+    }, [cookies]);
 
     useEffect(() => {
         setOpenDialog(dialogSelector);

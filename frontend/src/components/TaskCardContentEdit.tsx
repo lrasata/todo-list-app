@@ -36,7 +36,7 @@ const TaskCardContentEdit = ({
                              }: TaskCardEditProps) => {
     return <>
         <Box display="flex" flexDirection="row">
-            <TextField value={editingTitle} onChange={handleTitleEditChange} size="small" fullWidth/>
+            <TextField value={editingTitle} onChange={handleTitleEditChange} size="small" fullWidth sx={{ backgroundColor: "white" }}/>
             <Button
                 variant="contained"
                 onClick={() => {

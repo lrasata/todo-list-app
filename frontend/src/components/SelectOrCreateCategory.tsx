@@ -22,7 +22,7 @@ const SelectOrCreateCategory = ({ value, categories = [], onCreateNewTask, onCha
             labelId="category-select-label"
             id="category-select"
             label="Select a category"
-            sx={{ minWidth: 300, mb: 2 }}
+            sx={{ minWidth: 300, mb: 2, backgroundColor: "white" }}
             fullWidth={isMobile}
             defaultValue = ""
             onChange={onChange}

@@ -50,7 +50,7 @@ const LoginPage = () => {
                 {
                     ...inputValue,
                 },
-                { headers: {"Access-Control-Allow-Credentials": true}}
+                { withCredentials: true}
             );
             const { success, message } = data;
             if (success) {
