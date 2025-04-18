@@ -6,12 +6,19 @@ This project is a full-stack application built with `MongoDB, Express, React and
 The purpose of this project is to serve as a training to get familiar with those technologies.
 
 ## Features
-### Users can Sign Up or Log in
-<img src="./docs/signup.png" alt="signup" height="350"><img src="./docs/mobile-signup.png" alt="mobile-signup" height="350">
+### User can Log in
+<img src="./docs/login.png" alt="signup" height="350"><img src="./docs/mobile-login.png" alt="mobile-signup" height="350">
 
-### Users can only view and modify their own tasks
+### User can only view and update their own tasks
 <img src="./docs/todolist.png" alt="todolist" height="350"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="350">
 
+### User can create new tasks
+<img src="./docs/create-task.png" alt="create-task" height="350"><img src="./docs/mobile-create-task.png" alt="mobile-create-task" height="350">
+
+### User can create a new category of task
+<img src="./docs/create-category.png" alt="create-category" height="350"><img src="./docs/mobile-create-category.png" alt="mobile-create-category" height="350">
+
+### User view all tasks and filter results
 <img src="./docs/all-tasks.png" alt="all-tasks" height="350"><img src="./docs/mobile-all-tasks.png" alt="mobile-all-tasks" height="350">
 
 
