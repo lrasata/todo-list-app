@@ -14,9 +14,9 @@ module.exports = {
             await user.save();
             const token = createSecretToken(user._id);
             res.cookie("token", token, {
-                withCredentials: true,
                 httpOnly: false,
                 secure: process.env.NODE_ENV === 'production',
+                path: '/',
             });
             res.status(201)
                 .json({ message: "User signed in successfully", success: true, user });
@@ -41,9 +41,9 @@ module.exports = {
             }
             const token = createSecretToken(user._id);
             res.cookie("token", token, {
-                withCredentials: true,
                 httpOnly: false,
                 secure: process.env.NODE_ENV === 'production',
+                path: '/',
             });
             res.status(201).json({ message: "User logged in successfully", success: true });
             next()
