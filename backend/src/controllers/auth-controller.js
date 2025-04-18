@@ -18,7 +18,7 @@ module.exports = {
                 secure: true,
                 path: '/',
                 sameSite: 'None',
-                domain: `.${process.env.DOMAIN}`,
+                domain: process.env.NODE_ENV === 'production' ? `.${process.env.DOMAIN}` : undefined,
             });
             res.status(201)
                 .json({ message: "User signed in successfully", success: true, user });
@@ -47,7 +47,7 @@ module.exports = {
                 secure: true,
                 path: '/',
                 sameSite: 'None',
-                domain: `.${process.env.DOMAIN}`,
+                domain: process.env.NODE_ENV === 'production' ? `.${process.env.DOMAIN}` : undefined,
             });
             res.status(201).json({ message: "User logged in successfully", success: true });
             next()
