@@ -91,7 +91,7 @@ module.exports = {
         try {
             const { id } = req.params;
             const { category } = req.body;
-            const taskToUpdate = await Task.find({ 'user.userId': req.user._id, _id: id });
+            const taskToUpdate = await Task.findOne({ 'user.userId': req.user._id, _id: id });
 
             if (!taskToUpdate) {
                 res.status(404).json({ error: "Task of user not found" });
@@ -100,16 +100,16 @@ module.exports = {
             let fetchedCategory = undefined;
             if (category && category.categoryId !== '') {
                 fetchedCategory = await Category.findById(category.categoryId)
+            } else {
+                fetchedCategory = await Category.findById(taskToUpdate.category.categoryId)
             }
 
-            let bodyToUpdate = req.body;
-            if (fetchedCategory) {
-                bodyToUpdate = {...bodyToUpdate, category: {
+            let bodyToUpdate = {...req.body, category: {
                         name: fetchedCategory.name,
                         colour: fetchedCategory.colour,
                         categoryId: fetchedCategory._id
-                    }};
-            }
+                    }
+            };
 
             const updatedTask = await Task.findByIdAndUpdate(
                 id,

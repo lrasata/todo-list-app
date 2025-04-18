@@ -13,6 +13,7 @@ interface TaskCardProps {
     deleteTask: (id: string) => void;
     setEditingTitle: (title: string) => void;
     setEditingTaskDate: (date: Dayjs) => void;
+    setEditingCategoryId: (id: string) => void;
     displayDate: boolean;
 }
 
@@ -23,9 +24,19 @@ const TaskCardContent = ({
                              deleteTask,
                              setEditingTitle,
                              setEditingTaskDate,
+                             setEditingCategoryId,
                              displayDate,
                          }: TaskCardProps) => {
     const label = {inputProps: {'aria-label': task.title}};
+
+    const handleOnEdit = () => {
+        startEditing(task._id);
+        setEditingTitle(task.title);
+        setEditingTaskDate(dayjs(task.taskDate));
+        if (task.category) {
+            setEditingCategoryId(task.category.categoryId);
+        }
+    }
 
     return (
         <>
@@ -46,11 +57,7 @@ const TaskCardContent = ({
             </Box>
             <Stack direction="row" spacing={0} justifyContent="flex-end">
                 <IconButton
-                    onClick={() => {
-                        startEditing(task._id);
-                        setEditingTitle(task.title);
-                        setEditingTaskDate(dayjs(task.taskDate));
-                    }}
+                    onClick={handleOnEdit}
                     color="primary"
                     aria-label="Edit"
                 >

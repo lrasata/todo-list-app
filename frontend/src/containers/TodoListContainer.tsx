@@ -93,7 +93,9 @@ const TodoListContainer = ({
                                           updateTask={handleUpdateTask}
                                           startEditing={startEditing}
                                           deleteTask={handleDeleteTask}
-                                          setEditingTitle={setEditingTitle} setEditingTaskDate={setEditingTaskDate}
+                                          setEditingTitle={setEditingTitle}
+                                          setEditingTaskDate={setEditingTaskDate}
+                                          setEditingCategoryId={setEditingCategoryId}
                                           displayDate={displayDate}
                                           key={`${task._id}-task-card-content`}
                         />
