@@ -10,7 +10,9 @@ const LogOutButtonContainer = () => {
     const handleOnClickLogout = () => {
         navigate("/login");
         // @ts-ignore
-        removeCookie("token");
+        removeCookie("token", {
+            path: '/', // Must match path used when setting the cookie
+        });
     };
 
     return <Button variant="outlined" onClick={handleOnClickLogout} size="small">Log out</Button>
