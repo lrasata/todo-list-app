@@ -15,4 +15,9 @@ router.get('/', (req, res) => {
     res.send('API is up and running 🚀');
 });
 
+router.get('/get-cookie', (req, res) => {
+    const token = req.cookies.token; // Access the 'token' cookie
+    res.send(`Token value: ${token}`);
+});
+
 module.exports = router;
