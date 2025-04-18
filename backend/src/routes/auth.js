@@ -5,7 +5,7 @@ const {verifyUser} = require("../middlewares/auth-middleware");
 const router = express.Router();
 
 // route for User authentication
-router.post("/signup", signup);
+// router.post("/signup", signup); // for safety reason : only known users can login atm
 
 router.post("/login", login);
 

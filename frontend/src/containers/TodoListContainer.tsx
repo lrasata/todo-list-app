@@ -62,7 +62,7 @@ const TodoListContainer = ({
     };
 
     const handleOpenDialog = () => {
-        dispatch(dialogActions.open());
+        dispatch(dialogActions.open({ title: "Create new category", category: undefined }));
     };
 
     return (
@@ -93,7 +93,9 @@ const TodoListContainer = ({
                                           updateTask={handleUpdateTask}
                                           startEditing={startEditing}
                                           deleteTask={handleDeleteTask}
-                                          setEditingTitle={setEditingTitle} setEditingTaskDate={setEditingTaskDate}
+                                          setEditingTitle={setEditingTitle}
+                                          setEditingTaskDate={setEditingTaskDate}
+                                          setEditingCategoryId={setEditingCategoryId}
                                           displayDate={displayDate}
                                           key={`${task._id}-task-card-content`}
                         />

@@ -36,8 +36,47 @@ export const createCategory = createAsyncThunk(
                 category: response.data
             }
         } catch (error) {
-            console.error("Error getting categories:", error);
-            return rejectWithValue('Oops unable to fetch categories from API');
+            console.error("Error creating categories:", error);
+            return rejectWithValue('Oops unable to create category');
+
+        }
+    }
+);
+
+export const updateCategory = createAsyncThunk(
+    'categories/updateCategory',
+    async (arg: {_id: string, name: string, colour?: string}, { rejectWithValue }) => {
+        try {
+            const response = await axios.put<ICategory>(
+                `${API_CATEGORIES_ENDPOINT}/${arg._id}`,
+                { name: arg.name, colour: arg.colour ? arg.colour : undefined },
+                {headers: {"Content-Type": "application/json"}, withCredentials: true}
+            );
+            return {
+                category: response.data
+            }
+        } catch (error) {
+            console.error("Error updating categories:", error);
+            return rejectWithValue('Oops unable to update category');
+
+        }
+    }
+);
+
+export const deleteCategory = createAsyncThunk(
+    'categories/deleteCategory',
+    async (arg: {_id: string}, { rejectWithValue }) => {
+        try {
+            await axios.delete<ICategory>(
+                `${API_CATEGORIES_ENDPOINT}/${arg._id}`,
+                {headers: {"Content-Type": "application/json"}, withCredentials: true}
+            );
+            return {
+                _id: arg._id
+            }
+        } catch (error) {
+            console.error("Error deleting categories:", error);
+            return rejectWithValue('Oops unable to delete category');
 
         }
     }
@@ -57,6 +96,18 @@ const categorySlice = createSlice({
         builder.addCase(createCategory.fulfilled, (state, action) => {
             // @ts-ignore
             state.categories = [...state.categories, action.payload.category];
+        })
+        builder.addCase(updateCategory.fulfilled, (state, action) => {
+            const updatedCategory = action.payload.category;
+            const index = state.categories.findIndex( (element: ICategory) => element._id === updatedCategory._id)
+
+            if (index >= 0) {
+                // @ts-ignore
+                state.categories[index] = updatedCategory;
+            }
+        })
+        builder.addCase(deleteCategory.fulfilled, (state, action) => {
+            state.categories = state.categories.filter((c: ICategory) => c._id !== action.payload._id);
         })
 
     }

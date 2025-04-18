@@ -148,10 +148,11 @@ const AllTaskContainer = () => {
 
     return (
         <>
+            <Typography variant="h4" component="h1" gutterBottom>All your tasks</Typography>
             <Stack my={3} direction="column" gap={2}>
                 <SearchBar inputSearchText={uiFilter.search} handleSearch={handleInputSearch}/>
                 <BasicDatePicker value={dayjs(dateSelector) ?? ""} onChange={(date) => onDateChange(date)}/>
-                <CategoryFilterContainer categories={categoriesSelector}  handleCategoryFilterChange={handleCategoryFilterChange}/>
+                <CategoryFilterContainer categories={categoriesSelector} selectedCategories={selectedCategoryFilter}  handleCategoryFilterChange={handleCategoryFilterChange}/>
             </Stack>
             {
                 isLoading ? <Spinner/> : (

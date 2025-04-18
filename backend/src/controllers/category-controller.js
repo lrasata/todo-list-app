@@ -1,4 +1,5 @@
 const Category = require("../models/Category");
+const Task = require("../models/Task");
 
 const DEFAULT_COLOUR = '#FFFFFF';
 
@@ -45,6 +46,11 @@ module.exports = {
                 req.body,
                 { new: true } // Return the updated category
             )
+
+            await Task.updateMany(
+                { 'category.categoryId': id },
+                { $set: { 'category.name': req.body.name, 'category.colour': req.body.colour } },
+            );
             res.json(updatedCategory);
         } catch (error) {
             console.error(error.message);
@@ -61,6 +67,11 @@ module.exports = {
             }
 
             await Category.deleteOne( { _id: id });
+            await Task.updateMany(
+                { 'category.categoryId': id },
+                 { $unset: { category: null }},
+            );
+
             res.json({ message: "Category deleted" });
         } catch (error) {
             console.error(error.message);

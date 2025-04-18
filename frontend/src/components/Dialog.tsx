@@ -1,5 +1,5 @@
 import {Dialog as MuiDialog, DialogContent, DialogTitle, IconButton, useMediaQuery, useTheme} from "@mui/material";
-import {Close} from "@mui/icons-material";
+import CloseIcon from '@mui/icons-material/Close';
 import {ReactNode} from "react";
 
 export interface DialogProps {
@@ -31,7 +31,7 @@ const Dialog = (props: DialogProps) => {
                     color: theme.palette.grey[500],
                 })}
             >
-                <Close />
+                <CloseIcon />
             </IconButton>
             <DialogContent dividers>
                 {content}

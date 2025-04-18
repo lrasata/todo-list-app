@@ -31,7 +31,7 @@ module.exports = {
         // filter by text search
         const search = req.query.search;
         if (search && search !== '') {
-            filter = {...filter, $text: { $search: search }};
+            filter = {...filter, title: { $regex: search, $options: 'i' }};
         }
 
         // filter by date
@@ -61,9 +61,18 @@ module.exports = {
             return res.status(400).json({ error: "Task title is required" });
         }
 
-        let fetchedCategory = {};
+        let fetchedCategory = undefined;
         if (category && category.categoryId !== '') {
             fetchedCategory = await Category.findById(category.categoryId)
+        }
+
+        let categoryToLink = undefined;
+        if (fetchedCategory) {
+            categoryToLink = {
+                name: fetchedCategory.name,
+                colour: fetchedCategory.colour,
+                categoryId: fetchedCategory._id
+            }
         }
 
         try {
@@ -74,11 +83,7 @@ module.exports = {
                     username: req.user.username,
                     userId: req.user
                 },
-                category: {
-                    name: fetchedCategory.name,
-                    colour: fetchedCategory.colour,
-                    categoryId: fetchedCategory._id
-                }
+                category: categoryToLink || {}
             });
             await newTask.save();
             res.status(201).json(newTask);
@@ -90,29 +95,26 @@ module.exports = {
     updateTask: async (req, res) => {
         try {
             const { id } = req.params;
-            const { title, taskDate, category } = req.body;
-            const taskToUpdate = await Task.find({ 'user.userId': req.user._id, _id: id });
+            const { category } = req.body;
+            const taskToUpdate = await Task.findOne({ 'user.userId': req.user._id, _id: id });
 
             if (!taskToUpdate) {
                 res.status(404).json({ error: "Task of user not found" });
             }
 
-            let fetchedCategory = {};
+            let fetchedCategory = undefined;
             if (category && category.categoryId !== '') {
                 fetchedCategory = await Category.findById(category.categoryId)
+            } else {
+                fetchedCategory = await Category.findById(taskToUpdate.category.categoryId)
             }
 
-            let bodyToUpdate = {
-                title,
-                taskDate
-            }
-            if (fetchedCategory) {
-                bodyToUpdate = {...bodyToUpdate, category: {
+            let bodyToUpdate = {...req.body, category: {
                         name: fetchedCategory.name,
                         colour: fetchedCategory.colour,
                         categoryId: fetchedCategory._id
-                    }};
-            }
+                    }
+            };
 
             const updatedTask = await Task.findByIdAndUpdate(
                 id,

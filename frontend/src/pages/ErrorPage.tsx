@@ -4,7 +4,7 @@ const ErrorPage = () => {
     return (
         <>
             <main>
-                <Typography variant="h3">An error occurred!</Typography>
+                <Typography variant="h5">Oops something went wrong!</Typography>
                 <Typography>Could not find this page!</Typography>
             </main>
         </>

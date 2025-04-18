@@ -6,22 +6,30 @@ This project is a full-stack application built with `MongoDB, Express, React and
 The purpose of this project is to serve as a training to get familiar with those technologies.
 
 ## Features
-### Users can Sign Up or Log in
-<img src="./docs/signup.png" alt="signup" height="350"><img src="./docs/mobile-signup.png" alt="mobile-signup" height="350">
+### User can Log in
+<img src="./docs/login.png" alt="signup" height="300"><img src="./docs/mobile-login.png" alt="mobile-signup" height="300">
 
-### Users can only view and modify their own tasks
-<img src="./docs/todolist.png" alt="todolist" height="350"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="350">
+### User can only view and update their own tasks
+<img src="./docs/todolist.png" alt="todolist" height="300"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="300">
 
-<img src="./docs/all-tasks.png" alt="all-tasks" height="350"><img src="./docs/mobile-all-tasks.png" alt="mobile-all-tasks" height="350">
+### User can create new tasks
+<img src="./docs/create-task.png" alt="create-task" height="300"><img src="./docs/mobile-create-task.png" alt="mobile-create-task" height="300">
+
+### User can create a new category of task
+<img src="./docs/create-category.png" alt="create-category" height="300"><img src="./docs/mobile-create-category.png" alt="mobile-create-category" height="300">
+
+### User view all tasks and filter results
+<img src="./docs/all-tasks.png" alt="all-tasks" height="300"><img src="./docs/mobile-all-tasks.png" alt="mobile-all-tasks" height="300">
+
+### User can fully manage task categories
+<img src="./docs/all-categories.png" alt="all-categories" height="300"><img src="./docs/mobile-all-categories.png" alt="mobile-all-categories" height="300">
 
 
 ### Ongoing improvements
-- [ ] issue : Update task when marking to be completed is not working
-- [ ] issue : All tasks page filter : partial text search is not working
-- [ ] issue : All tasks page filter : non saved filters should be re-initialised after text search or date filter is performed
-- [ ] Category management (when updating a category on DocumentDB the change should propagate) + replace Navigation with AppBar to be able to add more menu item
+- [ ] Add unit test and e2e testing - In progress
+- [ ] Issue : cannot remove the category of a task on update
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
-- [ ] Add unit test and e2e testing
+
 
 ## Backend
 
@@ -31,7 +39,14 @@ Provide in the `.env` the MongoDB uri and a JWT secret for JWT generation
 ```
 MONGO_URI=
 JWT_SECRET=
+ALLOWED_ORIGIN=
+DOMAIN=
+NODE_ENV=
 ```
+
+- For `ALLOWED_ORIGIN` specify the frontend url, example : `ALLOWED_ORIGIN=http://localhost:5173`
+- For `DOMAIN` (optional), use this in deployed env, specify the domain example : `DOMAIN=mywebsite.com`
+- For `NODE_ENV`, specify value `development` or `production`
 
 ### Installation and Setup Instructions
 
@@ -60,7 +75,13 @@ Provide in the `.env` the backend url.
 
 ```
 VITE_BACKEND_API_URL=http://localhost:8080
+VITE_DOMAIN=
+VITE_NODE_ENV=
 ```
+
+- For `VITE_BACKEND_API_URL` specify the backend url.
+- For `VITE_DOMAIN` (optional), use this in deployed env, specify the domain example : `VITE_DOMAIN=mywebsite.com`
+- For `VITE_NODE_ENV` (optional), specify value `development` or `production`
 
 ### Installation and Setup Instructions
 
