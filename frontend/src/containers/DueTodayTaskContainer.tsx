@@ -10,7 +10,7 @@ import {
     useMediaQuery,
     useTheme
 } from '@mui/material';
-import {ICategory, ITask} from "../types/types.ts";
+import {ITask} from "../types/types.ts";
 import Brand from "../components/Brand.tsx";
 import BasicDatePicker from "../components/BasicDatePicker.tsx";
 import Typography from "@mui/material/Typography";
@@ -35,7 +35,6 @@ const DueTodayTaskContainer = () => {
 
     // @ts-ignore
     const categoriesSelector = useSelector( (state) => state.categories.categories);
-    const [categories, setCategories] = useState<ICategory[]>(categoriesSelector || []);
 
     const initialValue = {title: "", completed: false, taskDate: null, category: undefined}
     const [currentTask, setCurrentTask] = useState<Pick<ITask, "title" | "completed" | "taskDate" | "category">>(initialValue);
@@ -55,10 +54,6 @@ const DueTodayTaskContainer = () => {
     const handleOpenDialog = () => {
         dispatch(dialogActions.open());
     };
-
-    useEffect(() => {
-        setCategories(categoriesSelector)
-    }, [categoriesSelector]);
 
     useEffect(() => {
         // @ts-ignore
@@ -105,7 +100,7 @@ const DueTodayTaskContainer = () => {
                             (prevState) => ({...prevState, taskDate: dayjs(date)})
                         )}/>
                         <SelectOrCreateCategory value={currentTask.category?.categoryId || ""}
-                                                categories={categories}
+                                                categories={categoriesSelector}
                                                 onCreateNewTask={handleOpenDialog}
                                                 onChange={(e) => setCurrentTask(
                                                     (prevState) => ({...prevState, category: {categoryId: e.target.value}})

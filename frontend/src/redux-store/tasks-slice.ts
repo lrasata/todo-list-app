@@ -175,12 +175,13 @@ const tasksSlice = createSlice({
                 state.overdueTasks = removeIfExistTask(updatedTask, state.overdueTasks);
 
                 const index = state.dueTodayTasks.findIndex( (element: ITask) => element._id === updatedTask._id)
+
                 if (index >= 0) {
                     // @ts-ignore
-                    state.dueTodayTasks[index] = {...updatedTask}
+                    state.dueTodayTasks[index] = updatedTask;
                 } else {
                     // @ts-ignore
-                    state.dueTodayTasks = [updatedTask, ...state.dueTodayTasks]
+                    state.dueTodayTasks = [...state.dueTodayTasks, updatedTask]
                 }
             }
 
@@ -200,7 +201,7 @@ const tasksSlice = createSlice({
                 } else {
                     if (!updatedTask.completed) {
                         // @ts-ignore
-                        state.overdueTasks = [updatedTask, ...state.overdueTasks]
+                        state.overdueTasks = [...state.overdueTasks, updatedTask]
                     }
                 }
             }

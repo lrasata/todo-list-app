@@ -1,13 +1,15 @@
 import dayjs, {Dayjs} from "dayjs";
 import {ITask} from "../types/types.ts";
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 
 export const dateIsInThePast = (date: Dayjs) => {
-    const today = dayjs();
-    return date.isBefore(today, 'date');
+    const today = dayjs().utc();
+    return dayjs.utc(date).isBefore(today, 'day');
 }
 
 export const dateIsToday = (date: Dayjs) => {
-    return date.isSame(dayjs(), 'date');
+    return dayjs.utc(date).isSame(dayjs().utc(), 'day');
 }
 
 export const findAndUpdateTask = (task: ITask, array: ITask[]): ITask[] => {
