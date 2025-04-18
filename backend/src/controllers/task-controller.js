@@ -110,10 +110,10 @@ module.exports = {
             }
 
             let bodyToUpdate = {...req.body, category: {
-                        name: fetchedCategory.name,
-                        colour: fetchedCategory.colour,
-                        categoryId: fetchedCategory._id
-                    }
+                    name: fetchedCategory.name,
+                    colour: fetchedCategory.colour,
+                    categoryId: fetchedCategory._id
+                }
             };
 
             const updatedTask = await Task.findByIdAndUpdate(
