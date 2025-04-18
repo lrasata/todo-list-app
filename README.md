@@ -16,7 +16,7 @@ The purpose of this project is to serve as a training to get familiar with those
 
 
 ### Ongoing improvements
-- [ ] issue : Update task when marking to be completed is not working
+- [x] ~~issue : Update task when marking to be completed is not working~~
 - [ ] issue : All tasks page filter : partial text search is not working
 - [ ] issue : All tasks page filter : non saved filters should be re-initialised after text search or date filter is performed
 - [ ] Category management (when updating a category on DocumentDB the change should propagate) + replace Navigation with AppBar to be able to add more menu item
