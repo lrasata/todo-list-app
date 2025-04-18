@@ -31,7 +31,7 @@ module.exports = {
         // filter by text search
         const search = req.query.search;
         if (search && search !== '') {
-            filter = {...filter, $text: { $search: search }};
+            filter = {...filter, title: { $regex: search, $options: 'i' }};
         }
 
         // filter by date
