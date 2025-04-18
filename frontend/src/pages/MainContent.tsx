@@ -37,8 +37,13 @@ const MainContent = () => {
 
 
     return <>
-        <LogOutButtonContainer />
-        <MainNavigation  />
+        {
+            cookies.token && <>
+                <LogOutButtonContainer />
+                <MainNavigation  />
+            </>
+        }
+
         <Outlet />
         <Dialog
             open={openDialog}
