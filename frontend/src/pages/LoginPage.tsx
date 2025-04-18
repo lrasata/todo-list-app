@@ -4,11 +4,13 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import {API_LOGIN_ENDPOINT} from "../constants/constants.ts";
 import Typography from "@mui/material/Typography";
-import {Box, TextField} from "@mui/material";
+import {Box, Button, TextField, useMediaQuery, useTheme} from "@mui/material";
 import {useCookies} from "react-cookie";
 import Brand from "../components/Brand.tsx";
 
 const LoginPage = () => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     // @ts-ignore
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
@@ -89,10 +91,10 @@ const LoginPage = () => {
                     label="Password"
                     sx={{ backgroundColor: "white" }}
                 />
-{/*                <Box display="flex" flexDirection="column" gap={2} justifyContent="center" alignItems="center">
+                <Box display="flex" flexDirection="column" gap={2} justifyContent="center" alignItems="center">
                     <Button variant="contained" type="submit" fullWidth={isMobile}>Submit</Button>
-                    <Typography>Already have an account? <Link to={"/signup"}>Signup</Link></Typography>
-                </Box>*/}
+                    {/*<Typography>Already have an account? <Link to={"/signup"}>Signup</Link></Typography>*/}
+                </Box>
             </Box>
             <ToastContainer />
         </>
