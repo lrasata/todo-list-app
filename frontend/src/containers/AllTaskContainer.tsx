@@ -13,6 +13,7 @@ import dayjs, {Dayjs} from "dayjs";
 import {ICategory, ITask} from "../types/types.ts";
 import useQueryParams from '../hooks/useQueryParams';
 import CategoryFilterContainer from "./CategoryFilterContainer.tsx";
+import {fetchCategories} from "../redux-store/categories-slice.ts";
 
 interface IFilter {
     search: string;
@@ -45,6 +46,9 @@ const AllTaskContainer = () => {
     const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<ICategory[]>([]);
 
     useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchCategories());
+
         const searchQueryParam = getQueryParamByKey(SEARCH_QUERY_PARAMETER);
         if (searchQueryParam) {
             dispatch(filterActions.updateSearchText({search: searchQueryParam}));
