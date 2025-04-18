@@ -15,8 +15,9 @@ module.exports = {
             const token = createSecretToken(user._id);
             res.cookie("token", token, {
                 httpOnly: false,
-                secure: false,
+                secure: true,
                 path: '/',
+                sameSite: 'None',
             });
             res.status(201)
                 .json({ message: "User signed in successfully", success: true, user });
@@ -42,8 +43,9 @@ module.exports = {
             const token = createSecretToken(user._id);
             res.cookie("token", token, {
                 httpOnly: false,
-                secure: false,
+                secure: true,
                 path: '/',
+                sameSite: 'None',
             });
             res.status(201).json({ message: "User logged in successfully", success: true });
             next()

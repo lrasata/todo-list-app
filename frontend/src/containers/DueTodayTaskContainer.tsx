@@ -19,9 +19,10 @@ import dayjs from "dayjs";
 import AlertOverdueTasksContainer from "./AlertOverdueTasksContainer.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import Spinner from "../components/Spinner.tsx";
-import {createTask} from "../redux-store/tasks-slice.ts";
+import {createTask, fetchDueTodayTasks} from "../redux-store/tasks-slice.ts";
 import SelectOrCreateCategory from "../components/SelectOrCreateCategory.tsx";
 import {dialogActions} from "../redux-store/dialog-slice.ts";
+import {fetchCategories} from "../redux-store/categories-slice.ts";
 
 
 const DueTodayTaskContainer = () => {
@@ -58,6 +59,14 @@ const DueTodayTaskContainer = () => {
     useEffect(() => {
         setCategories(categoriesSelector)
     }, [categoriesSelector]);
+
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(fetchDueTodayTasks());
+
+        // @ts-ignore
+        dispatch(fetchCategories());
+    }, []);
 
     return (
         <>
