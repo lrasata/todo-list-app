@@ -18,6 +18,7 @@ module.exports = {
                 secure: true,
                 path: '/',
                 sameSite: 'None',
+                domain: `.${process.env.DOMAIN}`,
             });
             res.status(201)
                 .json({ message: "User signed in successfully", success: true, user });
@@ -46,6 +47,7 @@ module.exports = {
                 secure: true,
                 path: '/',
                 sameSite: 'None',
+                domain: `.${process.env.DOMAIN}`,
             });
             res.status(201).json({ message: "User logged in successfully", success: true });
             next()
