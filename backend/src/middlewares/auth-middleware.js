@@ -7,7 +7,7 @@ module.exports = {
         const token = req.cookies.token;
         if (!token) {
             return res.status(403)
-                .json({message: "Your are not authorized to perform this action"});
+                .json({message: "Missing token. Your are not authorized to perform this action"});
         }
         try {
             jwt.verify(token, process.env.JWT_SECRET, async (err, data) => {
