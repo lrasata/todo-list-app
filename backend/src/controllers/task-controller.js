@@ -61,9 +61,18 @@ module.exports = {
             return res.status(400).json({ error: "Task title is required" });
         }
 
-        let fetchedCategory = {};
+        let fetchedCategory = undefined;
         if (category && category.categoryId !== '') {
             fetchedCategory = await Category.findById(category.categoryId)
+        }
+
+        let categoryToLink = undefined;
+        if (fetchedCategory) {
+            categoryToLink = {
+                name: fetchedCategory.name,
+                colour: fetchedCategory.colour,
+                categoryId: fetchedCategory._id
+            }
         }
 
         try {
@@ -74,11 +83,7 @@ module.exports = {
                     username: req.user.username,
                     userId: req.user
                 },
-                category: {
-                    name: fetchedCategory.name,
-                    colour: fetchedCategory.colour,
-                    categoryId: fetchedCategory._id
-                }
+                category: categoryToLink || {}
             });
             await newTask.save();
             res.status(201).json(newTask);

@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import {dialogActions} from "../redux-store/dialog-slice.ts";
 import {useEffect} from "react";
-import {fetchCategories} from "../redux-store/categories-slice.ts";
+import {deleteCategory, fetchCategories} from "../redux-store/categories-slice.ts";
 
 const TaskCategoryContainer = () => {
     const dispatch = useDispatch();
@@ -27,6 +27,11 @@ const TaskCategoryContainer = () => {
         }
 
     };
+
+    const handleOnDelete = (_id: string) => {
+        // @ts-ignore
+        dispatch(deleteCategory({ _id }));
+    }
 
     useEffect(() => {
 
@@ -66,6 +71,7 @@ const TaskCategoryContainer = () => {
                                             <EditIcon/>
                                         </IconButton>
                                         <IconButton
+                                            onClick={() => handleOnDelete(category._id)}
                                             color="error"
                                             aria-label="Delete"
                                         >
