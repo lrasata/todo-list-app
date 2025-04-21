@@ -62,7 +62,7 @@ const TodoListContainer = ({
     };
 
     const handleOpenDialog = () => {
-        dispatch(dialogActions.open());
+        dispatch(dialogActions.open({ title: "Create new category", category: undefined }));
     };
 
     return (
