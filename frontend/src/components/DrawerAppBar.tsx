@@ -67,13 +67,13 @@ const DrawerAppBar = (props: Props) => {
         <Box sx={{ display: 'flex' }}>
             <AppBar component="nav">
                 <Container maxWidth="md">
-                    <Toolbar>
+                    <Toolbar sx={{ padding: '0 !important' }}>
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
                             edge="start"
                             onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { sm: 'none' } }}
+                            sx={{ my:2 , display: { sm: 'none' } }}
                         >
                             <MenuIcon />
                         </IconButton>

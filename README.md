@@ -25,7 +25,7 @@ The purpose of this project is to serve as a training to get familiar with those
 ### Ongoing improvements
 - [x] ~~replace Navigation with AppBar to be able to add more menu item~~
 - [x] ~~Category management (when updating a category on DocumentDB the change should propagate)~~
-- [ ] After creating a task due today, task does not appear on the page, needs to reload to see it 
+- [x] ~~After creating a task due today, task does not appear on the page, needs to reload to see it~~
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
 - [ ] Add unit test and e2e testing
 

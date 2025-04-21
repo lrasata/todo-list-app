@@ -97,7 +97,9 @@ const DueTodayTaskContainer = () => {
                             fullWidth
                         />
                         <BasicDatePicker value={dayjs(currentTask.taskDate) ?? ""} onChange={(date) => setCurrentTask(
-                            (prevState) => ({...prevState, taskDate: dayjs(date)})
+                            (prevState) => (
+                                {...prevState,
+                                    taskDate: dayjs(date).format('YYYY-MM-DD')})
                         )}/>
                         <SelectOrCreateCategory value={currentTask.category?.categoryId || ""}
                                                 categories={categoriesSelector}

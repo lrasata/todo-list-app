@@ -40,7 +40,10 @@ const TaskCardContentEdit = ({
             <Button
                 variant="contained"
                 onClick={() => {
-                    updateTask(task._id, {title: editingTitle, taskDate: dayjs(editingTaskDate), category: { categoryId: editingCategoryId || ''}});
+                    updateTask(task._id, {
+                        title: editingTitle,
+                        taskDate: dayjs(editingTaskDate).format('YYYY-MM-DD'),
+                        category: { categoryId: editingCategoryId || ''}});
                     setEditingTaskId(null);
                 }}
                 sx={{ml: 2}}
