@@ -40,7 +40,14 @@ Provide in the `.env` the MongoDB uri and a JWT secret for JWT generation
 ```
 MONGO_URI=
 JWT_SECRET=
+ALLOWED_ORIGIN=
+DOMAIN=
+NODE_ENV=
 ```
+
+- For `ALLOWED_ORIGIN` specify the frontend url, example : `ALLOWED_ORIGIN=http://localhost:5173`
+- For `DOMAIN` (optional), use this in deployed env, specify the domain example : `DOMAIN=mywebsite.com`
+- For `NODE_ENV`, specify value `development` or `production`
 
 ### Installation and Setup Instructions
 
@@ -69,7 +76,13 @@ Provide in the `.env` the backend url.
 
 ```
 VITE_BACKEND_API_URL=http://localhost:8080
+VITE_DOMAIN=
+VITE_NODE_ENV=
 ```
+
+- For `VITE_BACKEND_API_URL` specify the backend url.
+- For `VITE_DOMAIN` (optional), use this in deployed env, specify the domain example : `VITE_DOMAIN=mywebsite.com`
+- For `VITE_NODE_ENV` (optional), specify value `development` or `production`
 
 ### Installation and Setup Instructions
 

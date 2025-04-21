@@ -1,5 +1,3 @@
-import LogOutButtonContainer from "../containers/LogOutButtonContainer.tsx";
-import MainNavigation from "../components/MainNavigation.tsx";
 import {Outlet} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,6 +5,7 @@ import Dialog from "../components/Dialog.tsx";
 import CreateCategoryContainer from "../containers/CreateCategoryContainer.tsx";
 import {dialogActions} from "../redux-store/dialog-slice.ts";
 import {useCookies} from "react-cookie";
+import MainNavigationContainer from "../containers/MainNavigationContainer.tsx";
 
 const MainContent = () => {
     const dispatch = useDispatch();
@@ -25,10 +24,7 @@ const MainContent = () => {
 
     return <>
         {
-            cookies.token && <>
-                <LogOutButtonContainer />
-                <MainNavigation  />
-            </>
+            cookies.token && <MainNavigationContainer  />
         }
 
         <Outlet />

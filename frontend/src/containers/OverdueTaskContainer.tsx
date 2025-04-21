@@ -24,6 +24,7 @@ const OverdueTaskContainer = () => {
 
     return (
         <>
+            <Typography variant="h4" component="h1" gutterBottom>Overdue Tasks</Typography>
             <Typography variant="h5" component="h2" gutterBottom my={2}>Quick reminder — these tasks are waiting for you!</Typography>
             {
                 isLoading ? <Spinner/> : (<TodoListContainer tasks={overdueTasksSelector} displayDate={true}/>)
