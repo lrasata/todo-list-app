@@ -37,7 +37,27 @@ export const createCategory = createAsyncThunk(
             }
         } catch (error) {
             console.error("Error getting categories:", error);
-            return rejectWithValue('Oops unable to fetch categories from API');
+            return rejectWithValue('Oops unable to create category');
+
+        }
+    }
+);
+
+export const updateCategory = createAsyncThunk(
+    'categories/updateCategory',
+    async (arg: {_id: string, name: string, colour?: string}, { rejectWithValue }) => {
+        try {
+            const response = await axios.post<ICategory>(
+                `${API_CATEGORIES_ENDPOINT}/${arg._id}`,
+                { name: arg.name, colour: arg.colour ? arg.colour : undefined },
+                {headers: {"Content-Type": "application/json"}, withCredentials: true}
+            );
+            return {
+                category: response.data
+            }
+        } catch (error) {
+            console.error("Error getting categories:", error);
+            return rejectWithValue('Oops unable to update category');
 
         }
     }
@@ -55,6 +75,10 @@ const categorySlice = createSlice({
             state.categories = action.payload.categories;
         })
         builder.addCase(createCategory.fulfilled, (state, action) => {
+            // @ts-ignore
+            state.categories = [...state.categories, action.payload.category];
+        })
+        builder.addCase(updateCategory.fulfilled, (state, action) => {
             // @ts-ignore
             state.categories = [...state.categories, action.payload.category];
         })

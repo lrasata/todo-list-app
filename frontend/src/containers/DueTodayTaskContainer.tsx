@@ -52,7 +52,7 @@ const DueTodayTaskContainer = () => {
 
 
     const handleOpenDialog = () => {
-        dispatch(dialogActions.open());
+        dispatch(dialogActions.open({ title: "Create new category", category: null}));
     };
 
     useEffect(() => {

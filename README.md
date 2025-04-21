@@ -23,12 +23,8 @@ The purpose of this project is to serve as a training to get familiar with those
 
 
 ### Ongoing improvements
-- [x] ~~issue : Update task when marking to be completed is not working~~
-- [x] ~~issue : All tasks page filter : partial text search is not working~~
-- [x] ~~issue : All tasks page filter : non saved filters should be re-initialised after text search or date filter is performed~~
-- [x] ~~minor issue : date on backend and not correctly translated in frontend~~
-- [x] ~~issue: logout is not working on deployed env - cookie is not removed~~
-- [ ] Category management (when updating a category on DocumentDB the change should propagate) + replace Navigation with AppBar to be able to add more menu item
+- [x] ~~replace Navigation with AppBar to be able to add more menu item~~
+- [ ] Category management (when updating a category on DocumentDB the change should propagate)
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
 - [ ] Add unit test and e2e testing
 
