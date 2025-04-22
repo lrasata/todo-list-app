@@ -8,9 +8,8 @@
     "start": "nodemon server.js",
     "start-server": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "lrasata",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "bcrypt": "^5.1.1",
