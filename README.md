@@ -7,27 +7,29 @@ The purpose of this project is to serve as a training to get familiar with those
 
 ## Features
 ### User can Log in
-<img src="./docs/login.png" alt="signup" height="350"><img src="./docs/mobile-login.png" alt="mobile-signup" height="350">
+<img src="./docs/login.png" alt="signup" height="300"><img src="./docs/mobile-login.png" alt="mobile-signup" height="300">
 
 ### User can only view and update their own tasks
-<img src="./docs/todolist.png" alt="todolist" height="350"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="350">
+<img src="./docs/todolist.png" alt="todolist" height="300"><img src="./docs/mobile-todolist.png" alt="mobile-todolist" height="300">
 
 ### User can create new tasks
-<img src="./docs/create-task.png" alt="create-task" height="350"><img src="./docs/mobile-create-task.png" alt="mobile-create-task" height="350">
+<img src="./docs/create-task.png" alt="create-task" height="300"><img src="./docs/mobile-create-task.png" alt="mobile-create-task" height="300">
 
 ### User can create a new category of task
-<img src="./docs/create-category.png" alt="create-category" height="350"><img src="./docs/mobile-create-category.png" alt="mobile-create-category" height="350">
+<img src="./docs/create-category.png" alt="create-category" height="300"><img src="./docs/mobile-create-category.png" alt="mobile-create-category" height="300">
 
 ### User view all tasks and filter results
-<img src="./docs/all-tasks.png" alt="all-tasks" height="350"><img src="./docs/mobile-all-tasks.png" alt="mobile-all-tasks" height="350">
+<img src="./docs/all-tasks.png" alt="all-tasks" height="300"><img src="./docs/mobile-all-tasks.png" alt="mobile-all-tasks" height="300">
+
+### User can fully manage task categories
+<img src="./docs/all-categories.png" alt="all-categories" height="300"><img src="./docs/mobile-all-categories.png" alt="mobile-all-categories" height="300">
 
 
 ### Ongoing improvements
-- [x] ~~replace Navigation with AppBar to be able to add more menu item~~
-- [x] ~~Category management (when updating a category on DocumentDB the change should propagate)~~
-- [x] ~~After creating a task due today, task does not appear on the page, needs to reload to see it~~
+- [ ] Add unit test and e2e testing - In progress
+- [ ] Issue : cannot remove the category of a task on update
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
-- [ ] Add unit test and e2e testing
+
 
 ## Backend
 
