@@ -105,16 +105,14 @@ module.exports = {
             let fetchedCategory = undefined;
             if (category && category.categoryId !== '') {
                 fetchedCategory = await Category.findById(category.categoryId)
-            } else {
-                fetchedCategory = await Category.findById(taskToUpdate.category.categoryId)
             }
 
-            let bodyToUpdate = {...req.body, category: {
+            let bodyToUpdate = fetchedCategory ? {...req.body, category: {
                     name: fetchedCategory.name,
                     colour: fetchedCategory.colour,
                     categoryId: fetchedCategory._id
                 }
-            };
+            } : {...req.body, category: {}};
 
             const updatedTask = await Task.findByIdAndUpdate(
                 id,
