@@ -27,7 +27,7 @@ The purpose of this project is to serve as a training to get familiar with those
 
 ### Ongoing improvements
 - [ ] Add unit test and e2e testing - In progress
-- [ ] Issue : cannot remove the category of a task on update
+- [x] ~~Issue : cannot remove the category of a task on update~~
 - [x] ~~Issue :  on 1st load after login, the overdue tasks are not appearing~~
 - [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
 
