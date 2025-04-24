@@ -99,7 +99,7 @@ module.exports = {
             const existingTask = await Task.findOne({ 'user.userId': req.user._id, _id: id });
 
             if (!existingTask) {
-                res.status(404).json({ error: "Task of user not found" });
+                return res.status(404).json({ error: "Task of user not found" });
             }
 
             let existingCategory = undefined;
@@ -132,7 +132,7 @@ module.exports = {
             const taskToDelete = await Task.find({ 'user.userId': req.user._id, _id: id });
 
             if (!taskToDelete) {
-                res.status(404).json({ error: "Task of user not found" });
+                return res.status(404).json({ error: "Task of user not found" });
             }
 
             await Task.deleteOne( { _id: id });
