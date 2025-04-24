@@ -1,7 +1,5 @@
 # My TODO List App - MERN stack application
 
-> Please note that this **Project is under construction**
-
 This project is a full-stack application built with `MongoDB, Express, React and Node.js`.
 The purpose of this project is to serve as a training to get familiar with those technologies.
 
@@ -26,9 +24,9 @@ The purpose of this project is to serve as a training to get familiar with those
 
 
 ### Ongoing improvements
-- [ ] Add unit test and e2e testing - In progress
+- [ ] Add unit test and e2e testing - continuous progress
 - [x] ~~when clicking on check box to complete a task, category is disappearing~~
-- [ ] Fix slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
+- [ ] Fix/improvement slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
 
 
 ## Backend
