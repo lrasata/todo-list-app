@@ -61,17 +61,17 @@ module.exports = {
             return res.status(400).json({ error: "Task title is required" });
         }
 
-        let fetchedCategory = undefined;
+        let existingCategory = undefined;
         if (category && category.categoryId !== '') {
-            fetchedCategory = await Category.findById(category.categoryId)
+            existingCategory = await Category.findById(category.categoryId)
         }
 
         let categoryToLink = undefined;
-        if (fetchedCategory) {
+        if (existingCategory) {
             categoryToLink = {
-                name: fetchedCategory.name,
-                colour: fetchedCategory.colour,
-                categoryId: fetchedCategory._id
+                name: existingCategory.name,
+                colour: existingCategory.colour,
+                categoryId: existingCategory._id
             }
         }
 
@@ -96,27 +96,28 @@ module.exports = {
         try {
             const { id } = req.params;
             const { category } = req.body;
-            const taskToUpdate = await Task.findOne({ 'user.userId': req.user._id, _id: id });
+            const existingTask = await Task.findOne({ 'user.userId': req.user._id, _id: id });
 
-            if (!taskToUpdate) {
+            if (!existingTask) {
                 res.status(404).json({ error: "Task of user not found" });
             }
 
-            let fetchedCategory = undefined;
+            let existingCategory = undefined;
             if (category && category.categoryId !== '') {
-                fetchedCategory = await Category.findById(category.categoryId)
+                existingCategory = await Category.findById(category.categoryId)
             }
 
-            let bodyToUpdate = fetchedCategory ? {...req.body, category: {
-                    name: fetchedCategory.name,
-                    colour: fetchedCategory.colour,
-                    categoryId: fetchedCategory._id
+            const newBody = {...existingTask._doc, ...req.body};
+            let newBodyWithCategory = existingCategory ? {...newBody, category: {
+                    name: existingCategory.name,
+                    colour: existingCategory.colour,
+                    categoryId: existingCategory._id
                 }
-            } : {...req.body, category: {}};
+            } : {...newBody, category: {}};
 
             const updatedTask = await Task.findByIdAndUpdate(
                 id,
-                bodyToUpdate,
+                newBodyWithCategory,
                 { new: true } // Return the updated task
             )
             res.json(updatedTask);
