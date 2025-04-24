@@ -38,6 +38,11 @@ const TaskCardContent = ({
         }
     }
 
+    const handleOnTaskTicked = () => {
+        // have to specify the category as missing category for the API means, No category should be linked to the task
+        updateTask(task._id, {completed: !task.completed, category: { categoryId: task.category?.categoryId|| ''}})
+    }
+
     return (
         <>
             <Stack direction="row" spacing={1}>
@@ -48,7 +53,7 @@ const TaskCardContent = ({
                 <Box display="flex" flexDirection="row" alignItems="center">
                     <Checkbox {...label}
                               checked={task.completed}
-                              onChange={() => updateTask(task._id, {completed: !task.completed})}
+                              onChange={handleOnTaskTicked}
                     />
                     <Typography variant="body1" sx={{textDecoration: task.completed ? "line-through" : "none"}}>
                         {task.title}
