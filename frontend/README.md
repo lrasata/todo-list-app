@@ -5,6 +5,8 @@ Provide in the `.env` the backend url.
 
 ```
 VITE_BACKEND_API_URL=http://localhost:8080
+VITE_DOMAIN=
+VITE_PROFILE=
 ```
 
 ## Installation and Setup Instructions
