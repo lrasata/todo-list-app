@@ -1,7 +1,7 @@
 import DrawerAppBar from "../components/DrawerAppBar.tsx";
 import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
-import {DOMAIN, NODE_ENV} from "../constants/constants.ts";
+import {DOMAIN, PROFILE} from "../constants/constants.ts";
 
 const navItems = [{
     title: 'Home',
@@ -33,7 +33,7 @@ const MainNavigationContainer = () => {
         // @ts-ignore
         removeCookie("token", {
             path: '/', // Must match path used when setting the cookie
-            ...NODE_ENV === 'production' && { domain: `.${DOMAIN}` }
+            ...PROFILE === 'production' && { domain: `.${DOMAIN}` }
         });
     };
 

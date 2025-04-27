@@ -37,7 +37,7 @@ module.exports = {
             const { id } = req.params;
             const categoryToUpdate = await Category.find({ 'user.userId': req.user._id, _id: id });
 
-            if (!categoryToUpdate) {
+            if (!categoryToUpdate || categoryToUpdate.length === 0) {
                 res.status(404).json({ error: "Category not found" });
             }
 
@@ -62,7 +62,7 @@ module.exports = {
             const { id } = req.params;
             const categoryToDelete = await Category.find({ 'user.userId': req.user._id, _id: id });
 
-            if (!categoryToDelete) {
+            if (!categoryToDelete || categoryToDelete.length === 0) {
                 res.status(404).json({ error: "Category not found" });
             }
 

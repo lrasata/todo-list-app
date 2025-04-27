@@ -74,12 +74,12 @@ Provide in the `.env` the backend url.
 ```
 VITE_BACKEND_API_URL=http://localhost:8080
 VITE_DOMAIN=
-VITE_NODE_ENV=
+VITE_PROFILE=
 ```
 
 - For `VITE_BACKEND_API_URL` specify the backend url.
 - For `VITE_DOMAIN` (optional), use this in deployed env, specify the domain example : `VITE_DOMAIN=mywebsite.com`
-- For `VITE_NODE_ENV` (optional), specify value `development` or `production`
+- For `VITE_PROFILE` (optional), specify value `development` or `production`
 
 ### Installation and Setup Instructions
 
