@@ -115,6 +115,7 @@ const AllTaskContainer = () => {
     const handleInputSearch = (inputSearch: string) => {
         setUiFilter((prevState) => ({...prevState, search: inputSearch}));
         dispatch(filterActions.updateSearchText({search: inputSearch}));
+
         // @ts-ignore
         dispatch(fetchFilteredTasks({search: inputSearch, ...uiFilter.date && {date: formatDate(uiFilter.date)}}));
         if (inputSearch !== "") {
@@ -126,15 +127,16 @@ const AllTaskContainer = () => {
 
     const onDateChange = (date: Dayjs | null) => {
         if (date) {
-
             dispatch(filterActions.updateDate({date: formatDate(date)}));
             // @ts-ignore
             dispatch(fetchFilteredTasks({search: uiFilter.search, date: formatDate(date)}));
             setQueryParam(DATE_QUERY_PARAMETER, formatDate(date));
+            setUiFilter((prevState) => ({...prevState, date: date})); // Note that in IFilter this needs to be Dayjs
         } else {
             dispatch(filterActions.removeDate());
             // @ts-ignore
             dispatch(fetchFilteredTasks({search: uiFilter.search, date: null}));
+            setUiFilter((prevState) => ({...prevState, date: null}));
             removeQueryParamByKey(DATE_QUERY_PARAMETER);
         }
     }
