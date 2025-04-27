@@ -18,7 +18,7 @@ const BasicDatePicker = ({ value, onChange }: Props ) => {
             <DemoContainer  components={['DatePicker']} sx={{ padding: 0 }}>
                 <DemoItem label="Task date">
                     <DatePicker
-                        format="DD/MM/YYYY"
+                        format="DD-MM-YYYY"
                         sx={{ maxWidth: isMobile ? "100%": "20px", backgroundColor: "white"}}
                         onChange={onChange}
                         slotProps={{ field: { clearable: true } }}

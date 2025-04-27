@@ -14,6 +14,7 @@ import {ICategory, ITask} from "../types/types.ts";
 import useQueryParams from '../hooks/useQueryParams';
 import CategoryFilterContainer from "./CategoryFilterContainer.tsx";
 import {fetchCategories} from "../redux-store/categories-slice.ts";
+import {formatDate} from "../util/util.ts";
 
 interface IFilter {
     search: string;
@@ -115,7 +116,7 @@ const AllTaskContainer = () => {
         setUiFilter((prevState) => ({...prevState, search: inputSearch}));
         dispatch(filterActions.updateSearchText({search: inputSearch}));
         // @ts-ignore
-        dispatch(fetchFilteredTasks({search: inputSearch, ...uiFilter.date && {date: dayjs(uiFilter.date).toISOString()}}));
+        dispatch(fetchFilteredTasks({search: inputSearch, ...uiFilter.date && {date: formatDate(uiFilter.date)}}));
         if (inputSearch !== "") {
             setQueryParam(SEARCH_QUERY_PARAMETER, inputSearch);
         } else {
@@ -125,10 +126,11 @@ const AllTaskContainer = () => {
 
     const onDateChange = (date: Dayjs | null) => {
         if (date) {
-            dispatch(filterActions.updateDate({date: date.toISOString()}));
+
+            dispatch(filterActions.updateDate({date: formatDate(date)}));
             // @ts-ignore
-            dispatch(fetchFilteredTasks({search: uiFilter.search, date: date.toISOString()}));
-            setQueryParam(DATE_QUERY_PARAMETER, date.toISOString());
+            dispatch(fetchFilteredTasks({search: uiFilter.search, date: formatDate(date)}));
+            setQueryParam(DATE_QUERY_PARAMETER, formatDate(date));
         } else {
             dispatch(filterActions.removeDate());
             // @ts-ignore

@@ -23,10 +23,9 @@ The purpose of this project is to serve as a training to get familiar with those
 <img src="./docs/all-categories.png" alt="all-categories" height="300"><img src="./docs/mobile-all-categories.png" alt="mobile-all-categories" height="300">
 
 
-### Ongoing improvements
-- [ ] Add unit test and e2e testing - continuous progress
-- [x] ~~when clicking on check box to complete a task, category is disappearing~~
+### Further improvements
 - [ ] Fix/improvement slight flickering on All tasks page --> use createApi() from RTK query to optimise number of calls
+- [ ] Optimise minification of frontend chunks using dynamic imports to code-split application
 
 
 ## Backend
