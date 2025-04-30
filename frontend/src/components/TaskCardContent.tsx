@@ -1,4 +1,4 @@
-import {Box, Checkbox, Chip, IconButton, Stack} from "@mui/material";
+import {Box, Checkbox, Chip, IconButton, Stack, styled} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import dayjs, {Dayjs} from "dayjs";
 import EditIcon from "@mui/icons-material/Edit";
@@ -16,6 +16,20 @@ interface TaskCardProps {
     setEditingCategoryId: (id: string) => void;
     displayDate: boolean;
 }
+
+const StyledBoxContentContainer = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: theme.spacing(1),
+}));
+
+const StyledBoxTaskDetails = styled(Box)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
 
 const TaskCardContent = ({
                              task,
@@ -49,8 +63,8 @@ const TaskCardContent = ({
                 {task.taskDate && displayDate && <DateChip dateLabel={task.taskDate.toString()} />}
                 {task.category && task.category.name && <Chip label={task.category.name} variant="outlined"/>}
             </Stack>
-            <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" mt={1}>
-                <Box display="flex" flexDirection="row" alignItems="center">
+            <StyledBoxContentContainer>
+                <StyledBoxTaskDetails>
                     <Checkbox {...label}
                               checked={task.completed}
                               onChange={handleOnTaskTicked}
@@ -58,8 +72,8 @@ const TaskCardContent = ({
                     <Typography variant="body1" sx={{textDecoration: task.completed ? "line-through" : "none"}}>
                         {task.title}
                     </Typography>
-                </Box>
-            </Box>
+                </StyledBoxTaskDetails>
+            </StyledBoxContentContainer>
             <Stack direction="row" spacing={0} justifyContent="flex-end">
                 <IconButton
                     onClick={handleOnEdit}

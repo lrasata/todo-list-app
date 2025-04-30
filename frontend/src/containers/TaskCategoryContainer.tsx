@@ -2,8 +2,8 @@ import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import {Button, IconButton, Paper, Stack, TableBody} from "@mui/material";
+import TableRow, {TableRowProps} from "@mui/material/TableRow";
+import {Button, IconButton, Paper, Stack, styled, TableBody} from "@mui/material";
 import {ICategory} from "../types/types.ts";
 import {useDispatch, useSelector} from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,6 +12,19 @@ import Typography from "@mui/material/Typography";
 import {dialogActions} from "../redux-store/dialog-slice.ts";
 import {useEffect} from "react";
 import {deleteCategory, fetchCategories} from "../redux-store/categories-slice.ts";
+
+interface StyledTableRowProps extends TableRowProps {
+    categoryColour?: string; // Make categoryColour optional or required
+}
+
+const StyledTableRow = styled(TableRow, {
+    shouldForwardProp: (prop) => prop !== 'categoryColour',
+})<StyledTableRowProps>(({ categoryColour }) => ({
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+    backgroundColor: categoryColour,
+}));
 
 const TaskCategoryContainer = () => {
     const dispatch = useDispatch();
@@ -53,10 +66,9 @@ const TaskCategoryContainer = () => {
                     </TableHead>
                     <TableBody>
                         {categoriesSelector.map((category: ICategory) => (
-                            <TableRow
+                            <StyledTableRow
                                 key={category.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 },
-                                    backgroundColor: category.colour }}
+                                categoryColour={category.colour}
                             >
                                 <TableCell component="th" scope="row">
                                     {category.name}
@@ -79,7 +91,7 @@ const TaskCategoryContainer = () => {
                                         </IconButton>
                                     </Stack>
                                 </TableCell>
-                            </TableRow>
+                            </StyledTableRow>
                         ))}
                     </TableBody>
                 </Table>

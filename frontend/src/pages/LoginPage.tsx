@@ -4,9 +4,21 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import {API_LOGIN_ENDPOINT} from "../constants/constants.ts";
 import Typography from "@mui/material/Typography";
-import {Box, Button, TextField, useMediaQuery, useTheme} from "@mui/material";
+import {Box, BoxProps, Button, styled, TextField, useMediaQuery, useTheme} from "@mui/material";
 import {useCookies} from "react-cookie";
 import Brand from "../components/Brand.tsx";
+
+interface StyledBoxContainerProps extends BoxProps {
+    component?: React.ElementType; // React.ElementType can be any HTML or custom component
+}
+
+const StyledBoxContainer = styled(Box)<StyledBoxContainerProps>(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    gap: theme.spacing(3),
+    padding: theme.spacing(3),
+}))
+
 
 const LoginPage = () => {
     const theme = useTheme();
@@ -67,11 +79,7 @@ const LoginPage = () => {
     return (
         <>
             <Brand />
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{ display: "flex", flexDirection: "column", gap: 3, padding: 3 }}
-            >
+            <StyledBoxContainer component="form" onSubmit={handleSubmit}>
                 <Typography variant="h5" component="h1">Log in</Typography>
                 <TextField
                     type="email"
@@ -95,7 +103,7 @@ const LoginPage = () => {
                     <Button variant="contained" type="submit" fullWidth={isMobile}>Submit</Button>
                     {/*<Typography>Already have an account? <Link to={"/signup"}>Signup</Link></Typography>*/}
                 </Box>
-            </Box>
+            </StyledBoxContainer>
             <ToastContainer />
         </>
 
