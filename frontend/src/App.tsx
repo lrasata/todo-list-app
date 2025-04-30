@@ -1,36 +1,39 @@
-import MainLayout from "./pages/MainLayout.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import ErrorPage from "./pages/ErrorPage.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
-import ProtectedRoute from "./components/ProtectedRoute.tsx";
-import DueTodayTaskContainer from "./containers/DueTodayTaskContainer.tsx";
-import AllTaskContainer from "./containers/AllTaskContainer.tsx";
-import OverdueTaskContainer from "./containers/OverdueTaskContainer.tsx";
-import TaskCategoryContainer from "./containers/TaskCategoryContainer.tsx";
+import { Suspense, lazy } from "react";
+import Spinner from "./components/Spinner.tsx";
+
+const MainLayout = lazy(() => import("./pages/MainLayout.tsx"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage.tsx"));
+const LoginPage = lazy(() => import("./pages/LoginPage.tsx"));
+const ProtectedRoute = lazy(() => import("./components/ProtectedRoute.tsx"));
+const DueTodayTaskContainer = lazy(() => import("./containers/DueTodayTaskContainer.tsx"));
+const AllTaskContainer = lazy(() => import("./containers/AllTaskContainer.tsx"));
+const OverdueTaskContainer = lazy(() => import("./containers/OverdueTaskContainer.tsx"));
+const TaskCategoryContainer = lazy(() => import("./containers/TaskCategoryContainer.tsx"));
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout />,
-        errorElement: <ErrorPage />,
+        element: <Suspense fallback={<Spinner />}><MainLayout /> </Suspense>,
+        errorElement:<Suspense fallback={<Spinner />}> <ErrorPage /></Suspense>,
         children: [
             {
                 index: true,
-                element: <ProtectedRoute><DueTodayTaskContainer /></ProtectedRoute>,
+                element: <Suspense fallback={<Spinner />}><ProtectedRoute><DueTodayTaskContainer /></ProtectedRoute></Suspense>,
             },
             {
                 path: 'all-tasks',
-                element: <ProtectedRoute><AllTaskContainer /></ProtectedRoute>,
+                element: <Suspense fallback={<Spinner />}><ProtectedRoute><AllTaskContainer /></ProtectedRoute></Suspense>,
             },
             {
                 path: 'overdue-tasks',
-                element: <ProtectedRoute><OverdueTaskContainer /></ProtectedRoute>,
+                element: <Suspense fallback={<Spinner />}><ProtectedRoute><OverdueTaskContainer /></ProtectedRoute></Suspense>,
             },
             {
                 path: 'task-category',
-                element: <ProtectedRoute><TaskCategoryContainer /></ProtectedRoute>
+                element: <Suspense fallback={<Spinner />}><ProtectedRoute><TaskCategoryContainer /></ProtectedRoute></Suspense>
             },
-            {path: 'login', element: <LoginPage />},
+            {path: 'login', element: <Suspense fallback={<Spinner />}><LoginPage /></Suspense>},
             // {path: 'signup', element: <SignUpPage />}, // for safety reason, only known user can login
 
         ],
