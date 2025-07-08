@@ -1,10 +1,10 @@
 const { getCategories, createCategory, updateCategory, deleteCategory} = require('../src/controllers/category-controller');
-const Category = require('../src/models/category');
-const Task = require('../src/models/task');
+const Category = require('../src/models/Category');
+const Task = require('../src/models/Task');
 
 // Mocks
-jest.mock('../src/models/category');
-jest.mock('../src/models/task');
+jest.mock('../src/models/Category');
+jest.mock('../src/models/Task');
 
 describe('getCategories controller', () => {
     let req, res;

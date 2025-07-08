@@ -1,11 +1,11 @@
 const { getAllTasks, createTask, updateTask, deleteTask } = require('../src/controllers/task-controller');
-const Task = require('../src/models/task');
-const Category = require('../src/models/category');
+const Task = require('../src/models/Task');
+const Category = require('../src/models/Category');
 const { getDateTomorrow } = require('../src/util/dates');
 
 // Mocks
-jest.mock('../src/models/task');
-jest.mock('../src/models/category');
+jest.mock('../src/models/Task');
+jest.mock('../src/models/Category');
 jest.mock('../src/util/dates');
 
 describe('getAllTasks controller', () => {
