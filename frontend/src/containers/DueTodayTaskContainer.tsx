@@ -27,20 +27,18 @@ import {
 import SelectOrCreateCategory from "../components/SelectOrCreateCategory.tsx";
 import { dialogActions } from "../redux-store/dialog-slice.ts";
 import { fetchCategories } from "../redux-store/categories-slice.ts";
+import {AppDispatch, RootState} from "../redux-store";
 
 const DueTodayTaskContainer = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  // @ts-ignore
   const dueTodayTasksSelector = useSelector(
-    (state) => state.tasks.dueTodayTasks,
+    (state: RootState) => state.tasks.dueTodayTasks,
   );
-  // @ts-ignore
-  const isLoading = useSelector((state) => state.tasks.isLoading);
+  const isLoading = useSelector((state: RootState) => state.tasks.isLoading);
 
-  // @ts-ignore
   const categoriesSelector = useSelector(
-    (state) => state.categories.categories,
+    (state: RootState) => state.categories.categories,
   );
 
   const initialValue = {
@@ -59,7 +57,6 @@ const DueTodayTaskContainer = () => {
   const handleAddTask = async () => {
     if (!currentTask) return;
 
-    // @ts-ignore
     dispatch(createTask({ task: currentTask }));
     setCurrentTask(initialValue);
   };
@@ -71,13 +68,10 @@ const DueTodayTaskContainer = () => {
   };
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(fetchDueTodayTasks());
 
-    // @ts-ignore
     dispatch(fetchOverdueTasks());
 
-    // @ts-ignore
     dispatch(fetchCategories());
   }, []);
 

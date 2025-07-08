@@ -22,6 +22,7 @@ import {
   deleteCategory,
   fetchCategories,
 } from "../redux-store/categories-slice.ts";
+import { RootState } from "../redux-store";
 
 interface StyledTableRowProps extends TableRowProps {
   categoryColour?: string; // Make categoryColour optional or required
@@ -39,9 +40,8 @@ const StyledTableRow = styled(TableRow, {
 const TaskCategoryContainer = () => {
   const dispatch = useDispatch();
 
-  // @ts-ignore
   const categoriesSelector = useSelector(
-    (state) => state.categories.categories,
+    (state: RootState) => state.categories.categories,
   );
 
   const handleOpenDialog = (category?: ICategory) => {

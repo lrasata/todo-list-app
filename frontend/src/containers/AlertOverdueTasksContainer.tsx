@@ -2,10 +2,10 @@ import { Alert } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
+import {RootState} from "../redux-store";
 
 const AlertOverdueTasksContainer = () => {
-  // @ts-ignore
-  const overdueTasksSelector = useSelector((state) => state.tasks.overdueTasks);
+  const overdueTasksSelector = useSelector((state: RootState) => state.tasks.overdueTasks);
 
   return (
     <>

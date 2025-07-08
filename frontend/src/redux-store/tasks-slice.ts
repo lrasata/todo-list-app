@@ -25,7 +25,10 @@ const initialAllTasksState = {
 
 export const fetchFilteredTasks = createAsyncThunk(
   "tasks/fetchFilteredTasks",
-  async (arg: { search?: string; date?: string }, { rejectWithValue }) => {
+  async (
+    arg: { search?: string; date?: string | null },
+    { rejectWithValue },
+  ) => {
     let url = API_TASKS_ENDPOINT;
     if (arg) {
       const queryString = qs.stringify(arg);

@@ -13,7 +13,7 @@ export const dateIsToday = (date: Dayjs) => {
 };
 
 export const findAndUpdateTask = (task: ITask, array: ITask[]): ITask[] => {
-  let index = array.findIndex((item: ITask) => item._id === task._id);
+  const index = array.findIndex((item: ITask) => item._id === task._id);
   if (index >= 0) {
     array[index] = { ...task };
   }

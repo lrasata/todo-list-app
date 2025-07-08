@@ -10,6 +10,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { COLOUR_OPTIONS } from "../constants/constants.ts";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import { AppDispatch } from "../redux-store";
 
 interface Props {
   closeDialog: () => void;
@@ -23,7 +24,7 @@ const CreateOrUpdateCategoryContainer = ({
   colour,
   _id,
 }: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [currentName, setCurrentName] = useState<string>(name || "");
   const [currentColour, setCurrentColour] = useState<string>(colour || "");
 
@@ -37,12 +38,10 @@ const CreateOrUpdateCategoryContainer = ({
 
   const handleOnSave = () => {
     if (_id) {
-      // @ts-ignore
       dispatch(
         updateCategory({ _id, name: currentName, colour: currentColour }),
       );
     } else {
-      // @ts-ignore
       dispatch(createCategory({ name: currentName, colour: currentColour }));
     }
 

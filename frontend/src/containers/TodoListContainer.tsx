@@ -8,6 +8,7 @@ import TaskCardContentEdit from "../components/TaskCardContentEdit.tsx";
 import TaskCardContent from "../components/TaskCardContent.tsx";
 import Typography from "@mui/material/Typography";
 import { dialogActions } from "../redux-store/dialog-slice.ts";
+import {AppDispatch, RootState} from "../redux-store";
 
 interface ITodoList {
   tasks: ITask[];
@@ -15,7 +16,7 @@ interface ITodoList {
 }
 
 const TodoListContainer = ({ tasks, displayDate = true }: ITodoList) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
 
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
@@ -25,9 +26,8 @@ const TodoListContainer = ({ tasks, displayDate = true }: ITodoList) => {
     null,
   );
 
-  // @ts-ignore
   const categoriesSelector = useSelector(
-    (state) => state.categories.categories,
+    (state: RootState) => state.categories.categories,
   );
 
   const startEditing = (id: string) => {
@@ -43,7 +43,6 @@ const TodoListContainer = ({ tasks, displayDate = true }: ITodoList) => {
   };
 
   const handleDeleteTask = (id: string) => {
-    // @ts-ignore
     dispatch(deleteTask({ id }));
   };
 
@@ -54,7 +53,6 @@ const TodoListContainer = ({ tasks, displayDate = true }: ITodoList) => {
   };
 
   const handleUpdateTask = async (id: string, updatedTask: Partial<ITask>) => {
-    // @ts-ignore
     dispatch(updateTask({ id, updatedTask }));
     setEditingTaskId(null);
     setEditingTitle("");

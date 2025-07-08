@@ -5,8 +5,7 @@ import { DOMAIN, PROFILE } from "../constants/constants.ts";
 
 const LogOutButtonContainer = () => {
   const navigate = useNavigate();
-  // @ts-ignore
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [_, __, removeCookie] = useCookies(["token"]);
 
   const handleOnClickLogout = () => {
     navigate("/login");
@@ -15,7 +14,6 @@ const LogOutButtonContainer = () => {
     if (PROFILE === "production") {
       options = { ...options, domain: `.${DOMAIN}` };
     }
-    // @ts-ignore
     removeCookie("token", options);
   };
 

@@ -18,6 +18,7 @@ import useQueryParams from "../hooks/useQueryParams";
 import CategoryFilterContainer from "./CategoryFilterContainer.tsx";
 import { fetchCategories } from "../redux-store/categories-slice.ts";
 import { formatDate } from "../util/util.ts";
+import { AppDispatch, RootState } from "../redux-store";
 
 interface IFilter {
   search: string;
@@ -25,26 +26,23 @@ interface IFilter {
 }
 
 const AllTaskContainer = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  // @ts-ignore
-  const searchTextSelector = useSelector((state) => state.filter.search);
-  // @ts-ignore
-  const dateSelector = useSelector((state) => state.filter.date);
-  // @ts-ignore
+  const searchTextSelector = useSelector(
+    (state: RootState) => state.filter.search,
+  );
+  const dateSelector = useSelector((state: RootState) => state.filter.date);
   const categoriesSelector = useSelector(
-    (state) => state.categories.categories,
+    (state: RootState) => state.categories.categories,
   );
 
   const [uiFilter, setUiFilter] = useState<IFilter>({
     search: searchTextSelector,
     date: dateSelector,
   });
-  // @ts-ignore
-  const isLoading = useSelector((state) => state.tasks.isLoading);
-  // @ts-ignore
+  const isLoading = useSelector((state: RootState) => state.tasks.isLoading);
   const filteredTasksSelector: ITask[] = useSelector(
-    (state) => state.tasks.filteredTasks,
+    (state: RootState) => state.tasks.filteredTasks,
   );
   const [tasks, setTasks] = useState(filteredTasksSelector);
   const [resultMessage, setResultMessage] = useState<string>("");
@@ -57,7 +55,6 @@ const AllTaskContainer = () => {
   >([]);
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(fetchCategories());
 
     const searchQueryParam = getQueryParamByKey(SEARCH_QUERY_PARAMETER);
@@ -76,7 +73,6 @@ const AllTaskContainer = () => {
     }
 
     if (searchQueryParam || dateQueryParam) {
-      // @ts-ignore
       dispatch(
         fetchFilteredTasks({ search: searchQueryParam, date: dateQueryParam }),
       );
@@ -134,7 +130,6 @@ const AllTaskContainer = () => {
     setUiFilter((prevState) => ({ ...prevState, search: inputSearch }));
     dispatch(filterActions.updateSearchText({ search: inputSearch }));
 
-    // @ts-ignore
     dispatch(
       fetchFilteredTasks({
         search: inputSearch,
@@ -151,7 +146,6 @@ const AllTaskContainer = () => {
   const onDateChange = (date: Dayjs | null) => {
     if (date) {
       dispatch(filterActions.updateDate({ date: formatDate(date) }));
-      // @ts-ignore
       dispatch(
         fetchFilteredTasks({ search: uiFilter.search, date: formatDate(date) }),
       );
@@ -159,7 +153,6 @@ const AllTaskContainer = () => {
       setUiFilter((prevState) => ({ ...prevState, date: date })); // Note that in IFilter this needs to be Dayjs
     } else {
       dispatch(filterActions.removeDate());
-      // @ts-ignore
       dispatch(fetchFilteredTasks({ search: uiFilter.search, date: null }));
       setUiFilter((prevState) => ({ ...prevState, date: null }));
       removeQueryParamByKey(DATE_QUERY_PARAMETER);
