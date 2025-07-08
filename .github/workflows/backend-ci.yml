@@ -32,5 +32,10 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
+      - name: List files for debugging
+        working-directory: ./backend
+        run: ls -R
+
       - name: 🧪 Run tests
+        working-directory: ./backend
         run: npm test
