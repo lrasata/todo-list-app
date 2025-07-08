@@ -1,5 +1,7 @@
 # My TODO List App - Backend
 
+[![CI](https://github.com/lrasata/todo-list-app/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/lrasata/todo-list-app/actions/workflows/backend-ci.yml)
+
 ## Prerequisites
 Provide in the `.env` the MongoDB uri and a JWT secret for JWT generation
 
