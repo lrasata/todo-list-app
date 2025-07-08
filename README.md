@@ -1,5 +1,7 @@
 # My TODO List App - MERN stack application
 
+[![CI](https://github.com/lrasata/todo-list-app/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/lrasata/todo-list-app/actions/workflows/frontend-ci.yml)
+
 This project is a full-stack application built with `MongoDB, Express, React and Node.js`.
 The purpose of this project is to serve as a training to get familiar with those technologies.
 
