@@ -1,7 +1,9 @@
 # My Todo List App - Frontend - React + TypeScript + Vite
+
 [![CI](https://github.com/lrasata/todo-list-app/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/lrasata/todo-list-app/actions/workflows/frontend-ci.yml)
 
 ## Prerequisites
+
 Provide in the `.env` the backend url.
 
 ```
@@ -20,7 +22,6 @@ Move to frontend folder:
 Installation:
 
 `npm install`
-
 
 To Start Server:
 
