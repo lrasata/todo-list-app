@@ -41,14 +41,14 @@ app.use((req, res, next) => {
     next();
 });
 
-const authRoutes = require("./src/routes/auth");
+const authRoutes = require("./routes/auth");
 app.use("/", authRoutes);
 
-const tasksRoutes = require("./src/routes/tasks");
+const tasksRoutes = require("./routes/tasks");
 
 app.use("/api/tasks", tasksRoutes);
 
-const categoriesRoutes = require("./src/routes/categories");
+const categoriesRoutes = require("./routes/categories");
 
 app.use("/api/categories", categoriesRoutes);
 

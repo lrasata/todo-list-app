@@ -48,8 +48,20 @@ Server is running on PORT:
 
 ### Using Docker Compose
 
+**Production** - lightweight image, just runs the app
+
 ```bash
-docker-compose up --build
+docker compose up --build
+```
+
+**Development** - use nodemon, hot-reload, and mount code into the container
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```
+or Run 
+```bash
+npm run dev:docker
 ```
 
 This will build and start services in `docker-compose.yml`. In this file, the web app is set up to be accessible on port `8080` : `http://localhost:8080/`

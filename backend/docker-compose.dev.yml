@@ -1,0 +1,12 @@
+services:
+  todo-list-backend:
+    build:
+      context: .
+      target: development
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+    env_file:
+      - .env

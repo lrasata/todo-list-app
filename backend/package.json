@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js",
-    "start-server": "node server.js"
+    "start": "nodemon src/server.js",
+    "start-server": "node src/server.js",
+    "dev:docker": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build"
   },
   "author": "lrasata",
   "license": "MIT",
